@@ -973,33 +973,43 @@ The top level SQUAD project is here:
 ## TF-A
 
 TF-A has several SQUAD project, the most interesting is tf-main:
-https://qa-reports.linaro.org/tf/tf-main/
+
+	https://qa-reports.linaro.org/tf/tf-main/
 
 There are other project, but the details 
-https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l1/
-https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l2/
-https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l1/
-https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l2/
+
+	https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l1/
+	https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l2/
+	https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l1/
+	https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l2/
 
 ## TF-M
 
-https://qa-reports.linaro.org/tf/tf-m/
+	https://qa-reports.linaro.org/tf/tf-m/
 
 
-Staging Trusted Firmware System
+# Staging Trusted Firmware System
+
 This was documented here, but has been copied here as we approach wider review:
-https://docs.google.com/document/d/1qYEdhrYldBcnpVPNIYXG30n0CP8KUrF3DMq_EfAI43I/edit#heading=h.5y1mh3kp9xzw
-Brief description of the setup
-This document does not go into detail about each project, and is meant to be used as guidelines and rules for accessing the next environment.
+
+	https://docs.google.com/document/d/1qYEdhrYldBcnpVPNIYXG30n0CP8KUrF3DMq_EfAI43I/edit#heading=h.5y1mh3kp9xzw
+	
+## Brief description of the setup
+
+This document does **not** go into detail about each project, and is meant to be used as guidelines and rules for accessing the next environment.
 
 Servers:
-Jenkins Server https://ci.staging.trustedfirmware.org/
-x86_64-TF-02 Jenkins Agent
-Git/Gerrit https://review.trustedfirmware.org/
+
+* Jenkins Server https://ci.staging.trustedfirmware.org/
+* x86_64-TF-02 Jenkins Agent
+* Git/Gerrit https://review.trustedfirmware.org/
 
 The staging setup or “next” is meant to be used for developers to be able to test the CI infrastructure. The setup has been set up exactly the same as the production environment, the major difference between them is developers use a staging Jenkins server instead of the production server.
-Rules & Environment setup
-Staging environments have been set up in the next/* namespace location: https://git.trustedfirmware.org/next.
+
+## Rules & Environment setup
+
+Staging environments have been set up in the next/* namespace location: 
+	https://git.trustedfirmware.org/next.
 
 The next/* namespace is mirrored from production. The only repository that is not mirrored is the tf-<x>-job-configs repo. All other repositories are mirrored and as such the user should branch out from master.
 
@@ -1008,24 +1018,35 @@ Users need to be placed in the `trusted-firmware-staging-approvers` Gerrit group
 Due to the nature of allowing users to self approve their submit/merge changes into Gerrit, it is important that users understand that it triggers Jenkins jobs and as such care has to be taken when deploying those changes.
 
 Basic rules all developers should follow:
-Gerrit triggers and comments have to be disabled in the job. We do not want the staging server sending comments back to Gerrit reviews.
-Job triggers have to be manual only. Timed events are not allowed, not unless it is being used for testing.
-Developers must use their own job config, and not use master. Users must copy the job config, append your username and work on that config.
-How to setup basic next environment
-You have two options:
-you can either clone the repo again from the /next/ location
-or add a remote to your existing clone of the production repo.
 
- It might be easier to just add a /next/ remote to the user's existing repo clone and work from that. However, the /next/ has had the “basic rules” applied, and as such it is important that the user does not break these rules. 
+* Gerrit triggers and comments have to be **disabled** in the job. We do not want the staging server sending comments back to Gerrit reviews.
+* Job triggers have to be **manual** only. Timed events are not allowed, not unless it is being used for testing.
+* Developers **must** use their own job config, and not use master. Users must copy the job config, append your username and work on that config.
+
+## How to setup basic next environment
+
+You have two options:
+
+* you can either clone the repo again from the /next/ location
+* or add a remote to your existing clone of the production repo.
+
+It might be easier to just add a /next/ remote to the user's existing repo clone and work from that. However, the /next/ has had the “basic rules” applied, and as such it is important that the user does not break these rules. 
 
 tf-m-job-configs and tf-a-job-configs are *not* mirrored from production. However the other repos are, and as such the user can branch out from master and develop from there.
 
-To add a remote, it is simply necessary to add /next/ the url. So ssh://bhcopeland@review.trustedfirmware.org:29418/ci/tf-m-job-configs becomes ssh://bhcopeland@review.trustedfirmware.org:29418/next/ci/tf-m-job-configs. This then can be added with ‘git remote add gerrit-next ssh://bhcopeland@review.trustedfirmware.org:29418/next/ci/tf-m-job-configs’ or cloned via git clone <url>.
+To add a remote, it is simply necessary to add /next/ the url. So 
+
+ssh://bhcopeland@review.trustedfirmware.org:29418/ci/tf-m-job-configs becomes
+
+ssh://bhcopeland@review.trustedfirmware.org:29418/next/ci/tf-m-job-configs. This then can be added with ‘git remote add gerrit-next 
+
+ssh://bhcopeland@review.trustedfirmware.org:29418/next/ci/tf-m-job-configs’ or cloned via git clone &lturl>.
 
 Once a remote has been added, the user can then do `git fetch gerrit-next` and then checkout to that branch.
 
 Sample script to clone the repositories:
 
+```
 #!/bin/sh
 
 set -e
@@ -1038,12 +1059,13 @@ for project in tf-a-ci-scripts tf-a-job-configs tf-m-ci-scripts tf-m-job-configs
   git fetch gerrit-next
   cd ..
 done
-
+```
 
 I recommend the user to read https://jigarius.com/blog/multiple-git-remote-repositories for understanding two remotes. 
 
 Once in this environment, it is recommended the user then checkouts a new dev location and works from that. then copy the <job_name>.yaml file. This should be the same for the <scripts> location too. Once set up it is recommended that the user appends these changes to the job config.
 
+```
   - authorization:
        anonymous:
           - job-read
@@ -1053,16 +1075,19 @@ Once in this environment, it is recommended the user then checkouts a new dev lo
        - job-extended-read
        - job-build
        - job-cancel
-
+```
 
 It is important to note here, the user needs to replace bhcopeland with your own GitHub username. From this, it allows you to manually trigger and canel the job.
 
-Please ensure any triggers (timed based etc) are disabled. And please ensure silent: true is set inside the gerrit trigger so no gerrit comments get triggered.
-Workflow for next/tf-a-job-configs.git
+Please **ensure** any **triggers** (timed based etc) are disabled. And please ensure **silent: true** is set inside the gerrit trigger so no gerrit comments get triggered.
+
+### Workflow for next/tf-a-job-configs.git
+
 This is the workflow for creating ‘per-user’ jenkins jobs in staging instance. next/ci/tf-a-job-configs.git repository should be used in this case.
 
 
-Workflow for other repositories
+### Workflow for other repositories
+
 Other repositories, that are used inside the jobs, can be copied to other server (for example git.linaro.org). This should be added as a new remote to the existing repository. After changes are made and work well, they should be sent for review. Example below:
 
 
@@ -1072,38 +1097,45 @@ As noted above, changes in next/tf-a-job-configs can be self approved and merged
 
 
 
-Misc Info
+# Misc Info
+
 This information is used for creating this doc and is not needed for publishing.
-Relevant Tickets
+
+## Relevant Tickets
+
 Design and document Trusted-Firmware LAVA instance architecture
-https://projects.linaro.org/browse/LSS-926
+
+	https://projects.linaro.org/browse/LSS-926
+
 TF-CI Phase 2: CI user guide and document how to deploy local instance
-https://projects.linaro.org/browse/LSS-1473
 
-Slides
-https://docs.google.com/presentation/d/1NQw0-Uc_cmmxz30i_-cBsG9jBCr6uUYR-CD1eKEsk2I/edit?usp=sharing
+	https://projects.linaro.org/browse/LSS-1473
 
-# M11 Documentation and User Guide  (10 days timeboxed)
+## Slides
 
-1.  User Guide
-	1. From the TF *code* developer's perspective: "what do I do?"
-	2. submit a gerrit review, get results reported in gerrit review
+	https://docs.google.com/presentation/d/1NQw0-Uc_cmmxz30i_-cBsG9jBCr6uUYR-CD1eKEsk2I/edit?usp=sharing
 
-2.  From the maintainer's POV
-	1. how to navigate ci.trustedfirmware.org
-	2. how to trigger jobs, and track results
+&# M11 Documentation and User Guide  (10 days timeboxed)
 
-3.  LAVA documentation (from the user's POV, not developer)
-	1. which platforms are supported for each project
-	2. how to navigate tf.validation.linaro.org
-	3. how to read a job and investigate results
+1. User Guide
+   1. From the TF *code* developer's perspective: "what do I do?"
+   1. submit a gerrit review, get results reported in gerrit review
 
-4.  Pipeline description
-	1. How is the CI structured?
-	2. Start with the Jenkins Job Builder (JJB) configs
-	3. show how they create jobs on ci.trustedfirmware.org
-	4. show how they hook into tf-[am]-ci-scripts.org
+1. From the maintainer's POV
+   1. how to navigate ci.trustedfirmware.org
+   1. how to trigger jobs, and track results
 
-5.  tf-[am]-ci-scripts Overview
+1. LAVA documentation (from the user's POV, not developer)
+   1. which platforms are supported for each project
+   1. how to navigate tf.validation.linaro.org
+   1. how to read a job and investigate results
+
+1. Pipeline description
+   1. How is the CI structured?
+   1. Start with the Jenkins Job Builder (JJB) configs
+   1. show how they create jobs on ci.trustedfirmware.org
+   1. show how they hook into tf-[am]-ci-scripts.org
+
+1. tf-[am]-ci-scripts Overview
 
 
