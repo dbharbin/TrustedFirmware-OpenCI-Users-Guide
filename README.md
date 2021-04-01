@@ -87,6 +87,8 @@ Misc Info	43
 Relevant Tickets	43
 Slides	43
 
+<a name="headers"/>
+
 # User Guide
 This Google Document is a draft for development and review. Once reviewed, the doc will be made available on Phabricator on the trustedfirmware.org website where additional content will be added and reviewed.
 
