@@ -1,15 +1,6 @@
-# TrustedFirmware-OpenCI-Users-Guide
+# TrustedFirmware OpenCI Users Guide
 
-
-
-
-
-
-
-
-TrustedFirmware 
-OpenCI User's Guide
-Table of Contents
+**Table of Contents**
 User Guide	4
 How to Contribute Code	4
 Gerrit Setup	4
