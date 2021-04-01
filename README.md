@@ -782,138 +782,196 @@ Once your board is supported in the LAVA software, and your board meets the Hard
    * You will need to fill in the Description, even if you think the title is sufficient. Provide enough overview detail so the request is clear to understand by management, but make sure you include all the technical details you need for the support engineer to install your board.
    * If you think you will need specific hardware, such as a dedicated dispatcher, an SDmux, etc. then please describe that here.
    * Specify the type and number of boards you wish to be installed.
-Click the "Create" button at the bottom of the page
+1. Click the "Create" button at the bottom of the page
 1. Add Watchers
    * It's probably a good idea to add Don Harbin to the Watchers on the ticket.
-
-
-
 
 # TF LAVA instance - tf.validation.linaro.org
 
 LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
 
 TF LAVA instance settings are stored in salt and ansible repositories:
-Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
-Ansible repositories:
-https://git.linaro.org/lab-cambridge/ansible-lab.git/
-https://git.linaro.org/lab-cambridge/lab-dns.git/
-https://git.linaro.org/lab-cambridge/lab-dhcp.git/
-TF LAVA instance replication
+* Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
+* Ansible repositories:
+   * https://git.linaro.org/lab-cambridge/ansible-lab.git/
+   * https://git.linaro.org/lab-cambridge/lab-dns.git/
+   * https://git.linaro.org/lab-cambridge/lab-dhcp.git/
+
+## TF LAVA instance replication
+
 TF instance partially relies on Linaro infrastructure. Linaro’s login service (based on LDAP) is used for users authentication and logging into the TF LAVA instance. Therefore it’s not possible to replicate identical LAVA instance accounts outside of Linaro’s infrastructure. Apart from that, all configurations are stored in salt or ansible repositories. Replicating the remaining part of the instance can be done using salt and ansible tools with a new set of inventory variables.
 
 Before an instance is ready various ansible playbooks need to be run and, for LAVA set ups, salt needs to be run.
 
 For ansible, you need to go on deb-ansible host (ssh root@192.168.128.15). As root:
 
-# (cd /srv/lava-lab; git pull)
-# cd /etc/ansible/playbooks
-# ansible-playbook -i ../inventory/tf lava-lab.yml 
+```
+	# (cd /srv/lava-lab; git pull)
+	# cd /etc/ansible/playbooks
+	# ansible-playbook -i ../inventory/tf lava-lab.yml 
+```
 
 The following playbooks are used to configure all the relevant parts:
-lab_sssd_auth.yml file: enable LDAP authentication
-lab_snmp_enable.yml file:  enable SNMP, and non-free/contrib apt sources (needed for working SNMP set up with APC PDUs )
-lab_docker.yml file: install docker apt repository and docker service itself
-lab_aws_client.yml file: enable AWS authentication with AWS to preload docker images
-lab_lava_repo.yml file: add LAVA apt repository
-dhcp_tf.yml file: for the static leases and general DHCP server configuration
+* lab_sssd_auth.yml file: enable LDAP authentication
+* lab_snmp_enable.yml file:  enable SNMP, and non-free/contrib apt sources (needed for working SNMP set up with APC PDUs )
+* lab_docker.yml file: install docker apt repository and docker service itself
+* lab_aws_client.yml file: enable AWS authentication with AWS to preload docker images
+* lab_lava_repo.yml file: add LAVA apt repository
+* dhcp_tf.yml file: for the static leases and general DHCP server configuration
+
 Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate lava-lab repository.
 
 Until the salt migration to ansible is complete you will need to go on tf-master.tflab host (ssh root@10.88.16.10). As root:
-
-# (cd /srv/lava-lab; git pull)
-# salt ‘*’ state.highstate
-
+```
+	# (cd /srv/lava-lab; git pull)
+	# salt ‘*’ state.highstate
+```
 Note: on a brand new installation, you will need to run the ‘salt’ command twice. It’s due to an ordering problem in the salt state configuration. It will be fixed by the ansible migration.
-LAVA Master
+
+## LAVA Master
+
 LAVA Master and dispatchers run the Debian distribution (at the time of writing, Debian 10 Buster). LAVA packages are installed from apt.lavasoftware.org repository. On top of the basic installation, LAB specific configuration is applied with ansible.
 Note: the installation of lava-server is a manual process (and still a work in progress), while other configurations are automated and described in the ansible playbooks above.
-LAVA Dispatchers
+
+## LAVA Dispatchers
+
 TF instance uses 2 types of dispatchers:
-x86 dispatcher running on the same hardware as LAVA master. This dispatcher hosts Fast Models (FVP), QEMU, and Juno devices.
-Arm dispatchers running on Raspberry Pi 4 hardware. This dispatcher hosts MPS2 and Musca B1 devices.
+* x86 dispatcher running on the same hardware as LAVA master. This dispatcher hosts Fast Models (FVP), QEMU, and Juno devices.
+* Arm dispatchers running on Raspberry Pi 4 hardware. This dispatcher hosts MPS2 and Musca B1 devices.
 
 LAVA dispatchers setup is described in the LAVA documentation: https://lava.readthedocs.io/en/latest/admin/advanced-tutorials/deploying-rpi4b-as-worker/ 
-Upgrades
+
+## Upgrades
+
 Upgrades of LAVA software are performed after each LAVA release. All dispatchers and master have to run the same version of LAVA software.
-LAVA instance changes
+
+## LAVA instance changes
+
 All the changes are done by the LAB staff. They should be requested as Jira tickets (https://projects.linaro.org/secure/CreateIssue.jspa) with the following fields:
-Project: LSS (LAB & System Software)
-Type: Ticket
-Component: LAB
-Client Stakeholder: Trusted Firmware
+* Project: LSS (LAB & System Software)
+* Type: Ticket
+* Component: LAB
+* Client Stakeholder: Trusted Firmware
 
 Most common cases where ticket is required include:
-Adding new device to the LAVA instance
-Changing firmware on the boards that require manual action
-Adding or lifting access limitations
-Current list of available devices
+* Adding new device to the LAVA instance
+* Changing firmware on the boards that require manual action
+* Adding or lifting access limitations
+
+## Current list of available devices
+
 Up-to-date list of devices is available from the LAVA web UI. A simplified view shows only the device types. Currently, TF LAVA instance has Juno, MPS2, Musca B1 and QEMU devices.
-Local LAVA instance set up
+
+# Local LAVA instance set up
+
 Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official LAVA’s docker-compose repository and follow the README instructions.
-New device enablement in LAVA
+
+# New device enablement in LAVA
+
 Enabling new devices in LAVA is described in the LAVA documentation.
-Board setup
-Juno
+
+# Board setup
+
+## Juno
 More details on Collaborate page: https://collaborate.linaro.org/display/CTT/Juno 
-Peripherals
+
+## Peripherals
+
 Serial: Connected to serial console.
+
 Power: 
+
 Ethernet: Both the front and the back interfaces need to be connected.
+
 Storage: SSD and USB stick (for boot image).
-Deployment
+
+### Deployment
+
 After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found here.
-Troubleshooting
+
+### Troubleshooting
+
 The most common issue with Juno is broken PDU ports. The ports get stuck in ON mode so the board never reboots and can thus not interrupt the boot loader.
+
 Another common issue is "Failed to erase old recovery image" which is generally an issue with the SD card. It is solved as follows:
-Take brand new SD card and a root/sudo user on your SD reader capable *nix device
-Run "parted /dev/<diskID>
-mklabel msdos
-mkpart
-primary
-fat16
-1M
-2G
-exit parted
-mkfs.fat16 /dev/<diskID> -n JUNO<details>
-Download the recovery image from a health check
-Unpack and copy contents to SD card.
-Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
-MPS2
+1. Take brand new SD card and a root/sudo user on your SD reader capable *nix device
+1. Run "parted /dev/<diskID>
+1. mklabel msdos
+1. mkpart
+   1. primary
+   1. fat16
+   1. 1M
+   1. 2G
+1. exit parted
+1. mkfs.fat16 /dev/<diskID> -n JUNO<details>
+1. Download the recovery image from a health check
+1. Unpack and copy contents to SD card.
+1. Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
+
+## MPS2
+
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MPS2 
-Peripherals
+
+### Peripherals
+
 Serial: Connected to serial console or usb serial connected to host.
+
 Power: 12v
+
 Ethernet: One port connected.
+
 USB: Mini usb connected to host.
+
 Storage: sd card in an SD Mux.
-Deployment
+
+### Deployment
+
 The technical reference manual can be found here.
+
 An example health check with an image to use for deployment on MPS2 devices.
+
 There is also access to a device dictionary which describes the process of using SDMux with the board.
+
 In order to use SDMux, the host must have sd-mux-ctrl installed.
-Troubleshooting
+
+### Troubleshooting
+
 We found that the sd card containing the boot image easily got corrupted and that would take the board offline until manual intervention is achieved.
+
 This is mitigated with use of the SDMux and there have been few known issues since.
+
 SD Mux can be bought from https://shop.linux-automation.com/.
-Musca B1
+
+## Musca B1
+
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MuscaB1 
-Flashing the device for the first time.
+
+### Flashing the device for the first time.
+
 Flashing instructions are available on ARM community pages. It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
+
 firmware: DAPLink_QSPI_V34.bin
+
 After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on ARMmbed Github repository.
-Turn on automation
+
+### Turn on automation
+
 Boards need to have the 'automation' enabled. This is done by writing the 'auto_on.cfg' file to the USB mass storage 'MUSCA_B' while pressing nSRST button.
-Turn auto power on
+
+### Turn auto power on
+
 There is a hidden command in the v3.4 firmware: Auto power can be turned on by writing 'auto_pwr.cfg' to the USB mass storage 'MUSCA_B' while pressing nSRST button. Turning auto power off can be done by writing 'hard_pwr.cfg' to the USB mass storage 'MUSCA_B' while pressing the nSRST button.
 
+# SQUAD
 
-SQUAD
 SQUAD is a database storing test results from LAVA jobs and providing a dashboard where results can be compared across CI jobs and metrics generated.
 
 The top level SQUAD project is here:
-https://qa-reports.linaro.org/tf/
-TF-A
+
+	https://qa-reports.linaro.org/tf/
+
+## TF-A
+
 TF-A has several SQUAD project, the most interesting is tf-main:
 https://qa-reports.linaro.org/tf/tf-main/
 
@@ -922,7 +980,9 @@ https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l1/
 https://qa-reports.linaro.org/tf/tf-gerrit-tforg-l2/
 https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l1/
 https://qa-reports.linaro.org/tf/tf-tftf-gerrit-tforg-l2/
-TF-M
+
+## TF-M
+
 https://qa-reports.linaro.org/tf/tf-m/
 
 
