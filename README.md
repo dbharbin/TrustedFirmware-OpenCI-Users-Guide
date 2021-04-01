@@ -1,4 +1,6 @@
-# TrustedFirmware OpenCI Users Guide
+<header>
+TrustedFirmware OpenCI Users Guide
+</header>
 
 **Table of Contents**
 User Guide	4
