@@ -1115,7 +1115,7 @@ TF-CI Phase 2: CI user guide and document how to deploy local instance
 
 	https://docs.google.com/presentation/d/1NQw0-Uc_cmmxz30i_-cBsG9jBCr6uUYR-CD1eKEsk2I/edit?usp=sharing
 
-&# M11 Documentation and User Guide  (10 days timeboxed)
+\# M11 Documentation and User Guide  (10 days timeboxed)
 
 1. User Guide
    1. From the TF *code* developer's perspective: "what do I do?"
