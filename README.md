@@ -184,7 +184,8 @@ TF project support the following platforms in LAVA https://tf.validation.linaro.
 
 
 
-TF-A supported platforms
+### TF-A supported platforms
+
 Until recently, the only supported platform was the Juno board but now it also supports FVP models:
 https://tf.validation.linaro.org/scheduler/device_type/juno
 https://tf.validation.linaro.org/scheduler/device_type/fvp
@@ -200,13 +201,15 @@ fvp:fvp_arm_std_library_11.12_38
 Tag name, i.e. fvp_base_revc-2xaemv8a_11.12_38, corresponds to the particular model download from https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms.
 
 
-TF-M supported platforms
+### TF-M supported platforms
+
 TF-M LAVA devices are:
 mps https://tf.validation.linaro.org/scheduler/device_type/mps
 musca_b https://tf.validation.linaro.org/scheduler/device_type/musca-b
 qemu https://tf.validation.linaro.org/scheduler/device_type/qemu. 
 
-How to navigate tf.validation.linaro.org
+## How to navigate tf.validation.linaro.org
+
 All LAVA jobs triggered by Jenkins are executed at the TF LAVA lab https://tf.validation.linaro.org/ instance. The Jenkins jobs that launches LAVA jobs are tf-a-builder https://ci.trustedfirmware.org/job/tf-a-builder/ and tf-m-lava-submit https://ci.trustedfirmware.org/job/tf-m-lava-submit/. The Jenkins jobs contain the corresponding LAVA id which can be used to find the corresponding job at https://tf.validation.linaro.org/. In case of tf-a-builder job, the LAVA log itself is fetched from LAVA lab and attached to the job as seeing below
 
 
