@@ -684,80 +684,113 @@ Another common issue is "Failed to erase old recovery image" which is generally 
 ## MPS2
 
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MPS2 
-Peripherals
+
+### Peripherals
+
 Serial: Connected to serial console or usb serial connected to host.
+
 Power: 12v
+
 Ethernet: One port connected.
+
 USB: Mini usb connected to host.
+
 Storage: sd card in an SD Mux.
-Deployment
+
+### Deployment
+
 The technical reference manual can be found here.
+
 An example health check with an image to use for deployment on MPS2 devices.
+
 There is also access to a device dictionary which describes the process of using SDMux with the board.
+
 In order to use SDMux, the host must have sd-mux-ctrl installed.
-Troubleshooting
+
+### Troubleshooting
+
 We found that the sd card containing the boot image easily got corrupted and that would take the board offline until manual intervention is achieved.
+
 This is mitigated with use of the SDMux and there have been few known issues since.
+
 SD Mux can be bought from https://shop.linux-automation.com/.
-Musca B1
+
+## Musca B1
+
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MuscaB1 
-Flashing the device for the first time.
+
+### Flashing the device for the first time
+
 Flashing instructions are available on ARM community pages. It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
+
 firmware: DAPLink_QSPI_V34.bin
+
 After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on ARMmbed Github repository.
-Turn on automation
+
+### Turn on automation
+
 Boards need to have the 'automation' enabled. This is done by writing the 'auto_on.cfg' file to the USB mass storage 'MUSCA_B' while pressing nSRST button.
-Turn auto power on
+
+### Turn auto power on
+
 There is a hidden command in the v3.4 firmware: Auto power can be turned on by writing 'auto_pwr.cfg' to the USB mass storage 'MUSCA_B' while pressing nSRST button. Turning auto power off can be done by writing 'hard_pwr.cfg' to the USB mass storage 'MUSCA_B' while pressing the nSRST button.
 
-Adding Boards to LAVA
+## Adding Boards to LAVA
+
 "Adding a board to LAVA" can mean more than one thing, for example:
-Getting your device type supported in the LAVA software
-See section "Enabling new device in LAVA"
-Getting your physical board installed in Linaro's Cambridge Lab
+
+* Getting your device type supported in the LAVA software
+   * See section "Enabling new device in LAVA"
+* Getting your physical board installed in Linaro's Cambridge Lab
 
 Once your device type is supported in LAVA, and the LAVA software deployed to the Lab, you are ready to request that your boards be installed in Linaro's Cambridge Lab.
-Hardware Requirements
+
+## Hardware Requirements
+
 The Lab has some basic Hardware Requirements for boards being installed in the lab. It's advisable to read the "Automation and hardware design" and "LAB Device Deployment Guide" pages for more detailed information:
 	https://collaborate.linaro.org/display/CTT/Automation+and+hardware+design
-https://collaborate.linaro.org/display/CTT/LAB+Device+Deployment+Guide
+	
+	https://collaborate.linaro.org/display/CTT/LAB+Device+Deployment+Guide
 
 Basic requirements:
-The board must boot when power is supplied
-The Lab uses PDU switches to power cycle boards when needed
-The board must have a uniquely identifiable serial port
-If the board provides a 9 pin D-SUB, a suitable FTDI serial converter will provide this
-If the board provides a USB serial port, the Serial Number attribute of the USB port must be unique. If not, it may be possible to install a RaspberryPi dispatcher to isolate the board from the main Lab.
-The board must be able to be flashed in a reliable manner using automated tools
-No button presses or manual steps are permitted
-If your device boots via an SDcard, an SDmux can be used to reflash the board while it is powered off.
 
-How to get your board installed in the Linaro Cambridge Lab
+* The board must boot when power is supplied
+   * The Lab uses PDU switches to power cycle boards when needed
+* The board must have a uniquely identifiable serial port
+   * If the board provides a 9 pin D-SUB, a suitable FTDI serial converter will provide this
+   * If the board provides a USB serial port, the Serial Number attribute of the USB port must be unique. If not, it may be possible to install a RaspberryPi dispatcher to isolate the board from the main Lab.
+* The board must be able to be flashed in a reliable manner using automated tools
+   * No button presses or manual steps are permitted
+   * If your device boots via an SDcard, an SDmux can be used to reflash the board while it is powered off.
+
+## How to get your board installed in the Linaro Cambridge Lab
+
 Once your board is supported in the LAVA software, and your board meets the Hardware Requirements, you can raise an LSS ticket to get your board installed in the Lab.
 
-Go to https://projects.linaro.org/secure/CreateIssue!default.jspa
-Fill in the drop down boxes:
-Project: LAB & System Software (LSS)
-Issue Type: Ticket
-Click Next
-Fill in the required details
-Summary: You should fill in the "Summary" with a snappy title. I've started to prefix my titles with "TF CI: " to help identify them in the list of issues.
-Components: "LAB"
-Client Stakeholder: "Trusted-Firmware"
-Validation Server: "validation.linaro.org"
-Labels: "TrustedFirmware"
-Fill in the Description
-You will need to fill in the Description, even if you think the title is sufficient. Provide enough overview detail so the request is clear to understand by management, but make sure you include all the technical details you need for the support engineer to install your board.
-If you think you will need specific hardware, such as a dedicated dispatcher, an SDmux, etc. then please describe that here.
-Specify the type and number of boards you wish to be installed.
+1. Go to https://projects.linaro.org/secure/CreateIssue!default.jspa
+1. Fill in the drop down boxes:
+   * Project: LAB & System Software (LSS)
+   * Issue Type: Ticket
+   * Click Next
+1. Fill in the required details
+   * Summary: You should fill in the "Summary" with a snappy title. I've started to prefix my titles with "TF CI: " to help identify them in the list of issues.
+   * Components: "LAB"
+   * Client Stakeholder: "Trusted-Firmware"
+   * Validation Server: "validation.linaro.org"
+   * Labels: "TrustedFirmware"
+1. Fill in the Description
+   * You will need to fill in the Description, even if you think the title is sufficient. Provide enough overview detail so the request is clear to understand by management, but make sure you include all the technical details you need for the support engineer to install your board.
+   * If you think you will need specific hardware, such as a dedicated dispatcher, an SDmux, etc. then please describe that here.
+   * Specify the type and number of boards you wish to be installed.
 Click the "Create" button at the bottom of the page
-Add Watchers
-It's probably a good idea to add Don Harbin to the Watchers on the ticket.
+1. Add Watchers
+   * It's probably a good idea to add Don Harbin to the Watchers on the ticket.
 
 
 
 
-TF LAVA instance - tf.validation.linaro.org
+# TF LAVA instance - tf.validation.linaro.org
+
 LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
 
 TF LAVA instance settings are stored in salt and ansible repositories:
