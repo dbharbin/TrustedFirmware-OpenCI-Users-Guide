@@ -371,19 +371,15 @@ The TF project uses yaml files to define Jenkins jobs (JJB) https://docs.opensta
 .
 .
 .
-	triggers:
-	
-	- gerrit:
-	
+	triggers:	
+	- gerrit:	
 	server-name: review.trustedfirmware.org
     	trigger-on:
       		- comment-added-event:
           	approval-category: "Allow-CI"
           	approval-value: 1
-    	projects:
-	
+    	projects:	
     	- project-compare-type: PLAIN
-    	
       		project-pattern: TF-A/trusted-firmware-a
       		branches:
         		- branch-compare-type: PLAIN
@@ -420,7 +416,9 @@ The test configuration concisely specifies a single test: what set of images to 
 
 The test configuration file is named in the following format:
 
+```
 {tf-build-config | nil}[,tftf-build-config]: { run-config | nil}
+```
 
 That is, it contains:
 
@@ -428,7 +426,10 @@ That is, it contains:
 * Optional build configuration for TFTF;
 * Mandatory run configuration, or nil for build-only configs.
 
-The TF and TFTF build configs are separated by a comma; the build and run configs are separated by a colon. The test configuration is consumed by the build script , and produces a build package. For example, the test configuration fvp-default,fvp-default:fvp-tftf-fip.tftf-aemv8a-debug chooses:
+The TF and TFTF build configs are separated by a comma; the build and run configs are separated by a colon. The test configuration is consumed by the build script , and produces a build package. For example, the test configuration 
+```
+fvp-default,fvp-default:fvp-tftf-fip.tftf-aemv8a-debug chooses:
+```
 
 * To build TF with the fvp-default config;
 * To build TFTF with the fvp-default config;
@@ -439,16 +440,16 @@ Build configurations are plain text files containing build parameters for a comp
 For example, the TF build config fvp-aarch32-tbb-mbedtls-rsa-ecdsa-with-ecdsa-rotpk-rsa-cert has the following contents as of this writing:
 
 ```
-AARCH32_SP=sp_min
-ARCH=aarch32
-ARM_ROTPK_LOCATION=devel_ecdsa
-CROSS_COMPILE=arm-none-eabi-
-GENERATE_COT=1
-KEY_ALG=rsa
-PLAT=fvp
-ROT_KEY=plat/arm/board/common/rotpk/arm_rotprivk_ecdsa.pem
-TF_MBEDTLS_KEY_ALG=rsa+ecdsa
-TRUSTED_BOARD_BOOT=1
+	AARCH32_SP=sp_min
+	ARCH=aarch32
+	ARM_ROTPK_LOCATION=devel_ecdsa
+	CROSS_COMPILE=arm-none-eabi-
+	GENERATE_COT=1
+	KEY_ALG=rsa
+	PLAT=fvp
+	ROT_KEY=plat/arm/board/common/rotpk/arm_rotprivk_ecdsa.pem
+	TF_MBEDTLS_KEY_ALG=rsa+ecdsa
+	TRUSTED_BOARD_BOOT=1
 ```
 
 Build configs are located under tf_config and tftf_config subdirectories in the CI repository.
@@ -457,10 +458,13 @@ As described above, the build configuration describes what components to build, 
 
 For example, the following test configuration 
 
+```
 tftf-l2-extensive-tests-fvp/fvp-tspd,fvp-extensive:fvp-tftf-fip.tftf-cortexa57x4a53x4-tspd
+```
 
 Produces the following build configs 
 
+```
 Trusted Firmware config:
 
     CROSS_COMPILE=aarch64-none-elf-
@@ -472,16 +476,20 @@ Trusted Firmware TF config:
     CROSS_COMPILE=aarch64-none-elf-
     PLAT=fvp
     TESTS=extensive
+```
 
 And the following run config fragments
 
-fvp-tftf
-fvp-fip.tftf
-fvp-cortexa57x4a53x4
-fvp-tspd
+```
+	fvp-tftf
+	fvp-fip.tftf
+	fvp-cortexa57x4a53x4
+	fvp-tspd
+```
 
 Producing the following (release) build package
 
+```
 .
 ├── artefacts
 │   ├── build.log
@@ -539,57 +547,71 @@ Producing the following (release) build package
 ├── tmp.ku5nXd85b4
 ├── tmp.mCaqKgvgfT
 └── tmp.Sv3zjKIWz7
+```
 
 Ultimately, the job.yaml file above is the LAVA job definition, which contains the information required by LAVA (artefacts’ URL, model params, container containing the model, etc.) for a correct  job execution.
 
-TF-M CI scripts overview
+## TF-M CI scripts overview
 
-TODO - This section is missing
+	**TODO - This section is missing**
 
-TF LAVA Instance
+# TF LAVA Instance
+
 The TF LAVA instance can be found at tf.validation.linaro.org.
 
 LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
 
 TF LAVA instance settings are stored in salt and ansible repositories:
-Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
-Ansible repositories:
-https://git.linaro.org/lab-cambridge/ansible-lab.git/
-https://git.linaro.org/lab-cambridge/lab-dns.git/
-https://git.linaro.org/lab-cambridge/lab-dhcp.git/
-TF LAVA instance replication
+* Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
+* Ansible repositories:
+   * https://git.linaro.org/lab-cambridge/ansible-lab.git/
+   * https://git.linaro.org/lab-cambridge/lab-dns.git/
+   * https://git.linaro.org/lab-cambridge/lab-dhcp.git/
+
+# TF LAVA instance replication
+
 TF instance partially relies on Linaro infrastructure. Linaro’s login service (based on LDAP) is used for users authentication and logging into the TF LAVA instance. Therefore it’s not possible to replicate identical LAVA instance accounts outside of Linaro’s infrastructure. Apart from that, all configurations are stored in salt or ansible repositories. Replicating the remaining part of the instance can be done using salt and ansible tools with a new set of inventory variables.
 
 Before an instance is ready various ansible playbooks need to be run and, for LAVA set ups, salt needs to be run.
 
 For ansible, you need to go on deb-ansible host (ssh root@192.168.128.15). As root:
 
-# (cd /srv/lava-lab; git pull)
-# cd /etc/ansible/playbooks
-# ansible-playbook -i ../inventory/tf lava-lab.yml 
+```
+	# (cd /srv/lava-lab; git pull)
+	# cd /etc/ansible/playbooks
+	# ansible-playbook -i ../inventory/tf lava-lab.yml 
+```
 
 The following playbooks are used to configure all the relevant parts:
-lab_sssd_auth.yml file: enable LDAP authentication
-lab_snmp_enable.yml file:  enable SNMP, and non-free/contrib apt sources (needed for working SNMP set up with APC PDUs )
-lab_docker.yml file: install docker apt repository and docker service itself
-lab_aws_client.yml file: enable AWS authentication with AWS to preload docker images
-lab_lava_repo.yml file: add LAVA apt repository
-dhcp_tf.yml file: for the static leases and general DHCP server configuration
+
+* lab_sssd_auth.yml file: enable LDAP authentication
+* lab_snmp_enable.yml file:  enable SNMP, and non-free/contrib apt sources (needed for working SNMP set up with APC PDUs )
+* lab_docker.yml file: install docker apt repository and docker service itself
+* lab_aws_client.yml file: enable AWS authentication with AWS to preload docker images
+* lab_lava_repo.yml file: add LAVA apt repository
+* dhcp_tf.yml file: for the static leases and general DHCP server configuration
+
 Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate lava-lab repository.
 
 Until the salt migration to ansible is complete you will need to go on tf-master.tflab host (ssh root@10.88.16.10). As root:
 
-# (cd /srv/lava-lab; git pull)
-# salt ‘*’ state.highstate
+```
+	# (cd /srv/lava-lab; git pull)
+	# salt ‘*’ state.highstate
+```
 
 Note: on a brand new installation, you will need to run the ‘salt’ command twice. It’s due to an ordering problem in the salt state configuration. It will be fixed by the ansible migration.
-LAVA Master
+
+## LAVA Master
+
 LAVA Master and dispatchers run the Debian distribution (at the time of writing, Debian 10 Buster). LAVA packages are installed from apt.lavasoftware.org repository. On top of the basic installation, LAB specific configuration is applied with ansible.
 Note: the installation of lava-server is a manual process (and still a work in progress), while other configurations are automated and described in the ansible playbooks above.
-LAVA Dispatchers
+
+## LAVA Dispatchers
+
 TF instance uses 2 types of dispatchers:
-x86 dispatcher running on the same hardware as LAVA master. This dispatcher hosts Fast Models (FVP), QEMU, and Juno devices.
-Arm dispatchers running on Raspberry Pi 4 hardware. This dispatcher hosts MPS2 and Musca B1 devices.
+* x86 dispatcher running on the same hardware as LAVA master. This dispatcher hosts Fast Models (FVP), QEMU, and Juno devices.
+* Arm dispatchers running on Raspberry Pi 4 hardware. This dispatcher hosts MPS2 and Musca B1 devices.
 
 LAVA dispatchers setup is described in the LAVA documentation: https://lava.readthedocs.io/en/latest/admin/advanced-tutorials/deploying-rpi4b-as-worker/ 
 Upgrades
