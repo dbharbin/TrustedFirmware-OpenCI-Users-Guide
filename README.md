@@ -223,16 +223,20 @@ One powerful feature is the possibility to resubmit jobs: this enables the user 
 
 
 
-How to read a job and investigate results
+## How to read a job and investigate results
+
 The entrypoint to read a job failure is looking at the job’s landing page, i.e. https://tf.validation.linaro.org/scheduler/job/74086 
 
 
 
 Depending on the device type and job definition, the output can vary considerably. One can filter out relevant logs by clicking the different log levels. As in any system, failures can occur at any time and for different reasons, i.e introduced by a user's patch or scripts/infrastructure. In any case, a core maintainer should monitor and report or fix it accordingly.
 
-Pipeline description
+# Pipeline description
+
 The TF Open CI project is divided into two separate projects, each handling the respective project. Each is different in design so we describe each separately.
-TF-A CI pipeline description
+
+## TF-A CI pipeline description
+
 The TF-A CI pipeline https://git.trustedfirmware.org/ci/tf-a-job-configs.git/ had a refactor based on https://developer.trustedfirmware.org/w/collaboration/openci/, going from testing a single test configuration to hundreds of them. Besides improving considerably the QA, it added some complexity as we will see below.
 
 At the time of this writing, there are two (mostly) identical CIs, one running inside Arm https://jenkins.oss.arm.com/ (Internal CI) and one at https://ci.trustedfirmware.org/ (Open CI). These are two CI instances running in parallel but in different environments: the internal CI runs in a single node (master node) while the Open CI in multiple nodes (docker nodes). In the near future, only the Open CI will be running once all the internal CI features are fully migrated.
@@ -313,7 +317,7 @@ tf-a-builder’s console view:
 
 
 
-TF-M CI pipeline description
+## TF-M CI pipeline description
 
 TF-M jobs are found at https://ci.trustedfirmware.org/ and can be classified depending on the code coverage
 
@@ -347,7 +351,7 @@ Infra jobs
 tf-m-infra-health
 tf-m-build-config-infra-health
 
-TF-M Job dependencies
+### TF-M Job dependencies
 
 When a patch arrives at https://review.trustedfirmware.org/ and reviewed, a maintainer may allow the CI to be executed, which in turn triggers tf-m-static. This is exactly the same CI workflow as TF-A. In case of failure, the job cannot be merge into the stable branch. The tf-m-static triggers many more jobs as seen in the picture below
 
@@ -358,7 +362,9 @@ The job tf-m-nigthly is a more extensive job,  triggered everyday and tests the 
 
 
 In case the nightly job fails, an email notification is sent through the mailing list https://lists.trustedfirmware.org/mailman/listinfo/tf-m-ci-notifications . The maintainer is responsible for looking at the failed errors and identifying the (commit) culprit then reporting it to the developer.
-The TF Jenkins Job Builder (JJB) configs
+
+## The TF Jenkins Job Builder (JJB) configs
+
 The TF project uses yaml files to define Jenkins jobs (JJB) https://docs.openstack.org/infra/jenkins-job-builder/definition.html. Jobs currently defined for both projects are at https://git.trustedfirmware.org/ci/tf-m-job-configs.git/ and https://git.trustedfirmware.org/ci/tf-a-job-configs.git/. Job triggers are special types of jobs that listen to certain gerrit events. For example the job https://git.trustedfirmware.org/ci/tf-a-job-configs.git/tree/tf-gerrit-tforg-l1.yaml triggers every time a TF-A maintainer ‘Allows +1’ the CI to execute as defined the job’s trigger section 
 
 .
@@ -378,15 +384,18 @@ The TF project uses yaml files to define Jenkins jobs (JJB) https://docs.opensta
         	- branch-compare-type: PLAIN
           	branch-pattern: integration
 
-JJBs and Jenkins Jobs
+## JJBs and Jenkins Jobs
+
 JJB defines the behaviour of a Job through a YAML file, where Jenkins use these to create jobs (it is similar to Class and Object concepts in Object Oriented Programming). For example this is JJB of TF-A L1 trigger https://git.trustedfirmware.org/ci/tf-a-job-configs.git/tree/tf-gerrit-tforg-l1.yaml which is instanciated at  https://ci.trustedfirmware.org/job/tf-gerrit-tforg-l1/. Similar pattern applies for the rest of the JJB files.
-Calling CI scripts from JJB jobs
+
+## Calling CI scripts from JJB jobs
+
 JJB files themselves do not do much unless they execute something useful. CI scripts are kept in separate repositories depending on the project. Below is the relationship between jobs and scripts repositories per project
 
-TF-A CI Jobs https://git.trustedfirmware.org/ci/tf-a-job-configs.git/
-TF-A CI Scripts https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/
-TF-M CI Jobs https://git.trustedfirmware.org/ci/tf-m-job-configs.git/
-TF-M CI Scripts https://git.trustedfirmware.org/ci/tf-m-ci-scripts.git/
+* TF-A CI Jobs https://git.trustedfirmware.org/ci/tf-a-job-configs.git/
+* TF-A CI Scripts https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/
+* TF-M CI Jobs https://git.trustedfirmware.org/ci/tf-m-job-configs.git/
+* TF-M CI Scripts https://git.trustedfirmware.org/ci/tf-m-ci-scripts.git/
 
 In general, Jenkins jobs call scripts, the latter do the corresponding task. For example, below is shown again CI flow for the TF-A project
 
@@ -394,8 +403,10 @@ In general, Jenkins jobs call scripts, the latter do the corresponding task. For
 
 Where builders.sh is just a setup script (located at TF-A jobs repo) that finally calls run_local_ci.sh script located CI scripts repo, which is the entrypoint of the script execution. The run_local_ci.sh in turn calls others scripts that finally builds the package.
 
-CI Scripts overview
-TF-A CI scripts overview
+# CI Scripts overview
+
+## TF-A CI scripts overview
+
 The TF-A CI repository https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/ contains several folders and scripts for different purposes but we will not describe each one. Instead we will overview build package operation. Building a package means building (compiling) a specific platform with certain build parameters and post-build setup tasks, both indicated in a single test configuration (string or filename). The  operation is depicted in the following diagram
 
 
@@ -407,20 +418,21 @@ The test configuration file is named in the following format:
 
 That is, it contains:
 
-Mandatory build configuration for TF, or nil if TF is not required to be built.
-Optional build configuration for TFTF;
-Mandatory run configuration, or nil for build-only configs.
+* Mandatory build configuration for TF, or nil if TF is not required to be built.
+* Optional build configuration for TFTF;
+* Mandatory run configuration, or nil for build-only configs.
 
 The TF and TFTF build configs are separated by a comma; the build and run configs are separated by a colon. The test configuration is consumed by the build script , and produces a build package. For example, the test configuration fvp-default,fvp-default:fvp-tftf-fip.tftf-aemv8a-debug chooses:
 
-To build TF with the fvp-default config;
-To build TFTF with the fvp-default config;
-To apply run config fvp-tftf-fip.tftf-aemv8a-debug
+* To build TF with the fvp-default config;
+* To build TFTF with the fvp-default config;
+* To apply run config fvp-tftf-fip.tftf-aemv8a-debug
 
 Build configurations are plain text files containing build parameters for a component; either TF or TFTF. The build parameters are sorted and listed one per line, and would appear on the component's build command line verbatim. Up to two build configurations can be specified – one for TF (mandatory), and another one for TFTF (optional). If the test doesn't require Trusted Firmware to be built (for example, for a TFTF build-only configuration), it must be specified as nil.
 
 For example, the TF build config fvp-aarch32-tbb-mbedtls-rsa-ecdsa-with-ecdsa-rotpk-rsa-cert has the following contents as of this writing:
 
+```
 AARCH32_SP=sp_min
 ARCH=aarch32
 ARM_ROTPK_LOCATION=devel_ecdsa
@@ -431,6 +443,7 @@ PLAT=fvp
 ROT_KEY=plat/arm/board/common/rotpk/arm_rotprivk_ecdsa.pem
 TF_MBEDTLS_KEY_ALG=rsa+ecdsa
 TRUSTED_BOARD_BOOT=1
+```
 
 Build configs are located under tf_config and tftf_config subdirectories in the CI repository.
 
