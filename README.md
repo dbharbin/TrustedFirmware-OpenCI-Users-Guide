@@ -681,6 +681,7 @@ Another common issue is "Failed to erase old recovery image" which is generally 
 1.Unpack and copy contents to SD card.
 1. Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
 
+
 ## MPS2
 
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MPS2 
