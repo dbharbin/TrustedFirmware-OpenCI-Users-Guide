@@ -94,7 +94,7 @@ This Google Document is a draft for development and review. Once reviewed, the d
 
 This guide briefly explains how to use and contribute to the Trusted Firmware project https://www.trustedfirmware.org/, in particular the Trusted Firmware A https://www.trustedfirmware.org/projects/tf-a/ and Trusted Firmware M https://www.trustedfirmware.org/projects/tf-m/. 
 
-# How to Contribute Code
+## How to Contribute Code
 The Trusted Firmware core projects, TF-M and TF-A, are both open source projects and both share the same way to accept user contributions.  Code changes, commonly known as patches or patchsets, are git-tracked so once the corresponding project is cloned, all content (history of previous patches which now are commits) is available at the user's machine.
 
 TF projects use Gerrit https://review.trustedfirmware.org/dashboard/self as a centralized system to push, update, review and review patches. Contributors must push their patches to gerrit, so CI and reviewers can see the proposed change. One can see the open ones at https://review.trustedfirmware.org/q/status:open. 
@@ -103,7 +103,8 @@ TF projects use Gerrit https://review.trustedfirmware.org/dashboard/self as a ce
 Once a patch is approved, one of the core maintainers merges it to the main branch (master) through Gerrit. The same cycle is repeated for every patch, where a patch series may be merged in one step.
 
 Mailing lists  https://lists.trustedfirmware.org/mailman/listinfo/tf-a https://lists.trustedfirmware.org/mailman/listinfo/tf-m are used to communicate latest news and also it is the main channel for users to post questions or issues, so it is a good idea to subscribe to these. Note, the mailing lists are not intended for patch reviews, so patches should go into Gerrit and news/questions/issues through the mailing lists.
-Gerrit Setup
+
+### Gerrit Setup
 
 Once the project is cloned, there are some two extra steps to setup gerrit properly: 1. setting up the gerrit remote repository and 2. Git-review package installation
 
@@ -125,7 +126,7 @@ $ git review -r
 
 If no issues are found at this point, you should be ready to start contributing to the project!
 
-Commit and review
+### Commit and review
 
 No matter what change you want to make in any repository, one needs to create one or more commits into a local branch before submission. All commits must have ‘Signed-off-by’ and ‘Change-id’ strings in the commit description otherwise submission fails. The ‘Signed-off-by’ is introduced explicitly by the user (git commit -s) and the ‘Change-id’ automatically created by the git-review plugin. Patches should be atomic, just targeting one task. A commit’s subject should answer the question ‘what changed’ and the commit’s description answers the question ‘why it changed’. Be clear and always use present verbs, i.e use Add instead of Adding.
 
@@ -146,20 +147,24 @@ Once reviewers are included, you would probably get some feedback pretty soon. T
 
 More details about Gerrit can be found in the upstream documentation:
 	https://gerrit-documentation.storage.googleapis.com/Documentation/3.3.1/index.html
-From the maintainer's POV
+
+## From the maintainer's POV
+
 All CI is done with Jenkins at https://ci.trustedfirmware.org/. There are lots of jobs so as a first impression, it is difficult to follow the CI flow. Section 4, Pipeline description, describes each project’s CI in detail.
 
 
 
 Each project, TF-A and TF-M, have different CI jobs and scripts hosted in the following repos
 
-TF-A CI Jobs https://git.trustedfirmware.org/ci/tf-a-job-configs.git/
-TF-A CI Scripts https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/
-TF-M CI Jobs https://git.trustedfirmware.org/ci/tf-m-job-configs.git/
-TF-M CI Scripts https://git.trustedfirmware.org/ci/tf-m-ci-scripts.git/
+* TF-A CI Jobs https://git.trustedfirmware.org/ci/tf-a-job-configs.git/
+* TF-A CI Scripts https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/
+* TF-M CI Jobs https://git.trustedfirmware.org/ci/tf-m-job-configs.git/
+* TF-M CI Scripts https://git.trustedfirmware.org/ci/tf-m-ci-scripts.git/
 
 The job config repositories contain Jenkins Job Definitions, called JJB (Jenkins Job Builders) files. The  CI scripts repositories host scripts that are required for the CI, i.e build scripts, static checks, etc.
-Manual Job trigger
+
+## Manual Job trigger
+
 For patches that arrive at gerrit, the CI is explicitly triggered by a core maintainer. However there are cases where a particular job needs to be rebuilt. Jobs can be rebuilt at any level, from the trigger job to the job that builds or launches the LAVA execution. For example, the below picture shows a trigger job with the ‘Build with Parameters’ and ‘Rebuild last’ options. Both options allow the maintainer to change any job parameter before actually executing it.
 
 
@@ -170,8 +175,10 @@ Most  probably, you may want to go to a specific failed job and ‘Rebuild’
 
 There may be many reasons to rebuild but perhaps the most trivial one is to make sure the error is valid and not a transient one. Look at the job’s console for errors.
 
-LAVA documentation
-Supported platforms
+# LAVA documentation
+
+## Supported platforms
+
 TF project support the following platforms in LAVA https://tf.validation.linaro.org/scheduler/device_types
 
 
