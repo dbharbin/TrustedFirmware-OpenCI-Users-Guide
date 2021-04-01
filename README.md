@@ -614,42 +614,63 @@ TF instance uses 2 types of dispatchers:
 * Arm dispatchers running on Raspberry Pi 4 hardware. This dispatcher hosts MPS2 and Musca B1 devices.
 
 LAVA dispatchers setup is described in the LAVA documentation: https://lava.readthedocs.io/en/latest/admin/advanced-tutorials/deploying-rpi4b-as-worker/ 
-Upgrades
+
+## Upgrades
+
 Upgrades of LAVA software are performed after each LAVA release. All dispatchers and master have to run the same version of LAVA software.
-LAVA instance changes
+
+## LAVA instance changes
+
 All the changes are done by the LAB staff. They should be requested as Jira tickets (https://projects.linaro.org/secure/CreateIssue.jspa) with the following fields:
-Project: LSS (LAB & System Software)
-Type: Ticket
-Component: LAB
-Client Stakeholder: Trusted Firmware
+
+* Project: LSS (LAB & System Software)
+* Type: Ticket
+* Component: LAB
+* Client Stakeholder: Trusted Firmware
 
 Most common cases where ticket is required include:
-Adding new device to the LAVA instance
-Changing firmware on the boards that require manual action
-Adding or lifting access limitations
-Current list of available devices
+* Adding new device to the LAVA instance
+* Changing firmware on the boards that require manual action
+* Adding or lifting access limitations
+
+## Current list of available devices
+
 Up-to-date list of devices is available from the LAVA web UI. A simplified view shows only the device types. Currently, TF LAVA instance has Juno, MPS2, Musca B1 and QEMU devices.
-Local LAVA instance set up
+
+# Local LAVA instance set up
+
 Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official LAVA’s docker-compose repository and follow the README instructions.
-New device enablement in LAVA
+
+# New device enablement in LAVA
+
 Enabling new devices in LAVA is described in the LAVA documentation.
-Board setup
-Juno
+
+# Board setup
+
+## Juno
+
 More details on Collaborate page: https://collaborate.linaro.org/display/CTT/Juno 
-Peripherals
+
+### Peripherals
+
 Serial: Connected to serial console.
 Power: 
 Ethernet: Both the front and the back interfaces need to be connected.
 Storage: SSD and USB stick (for boot image).
-Deployment
+
+### Deployment
+
 After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found here.
-Troubleshooting
+
+### Troubleshooting
+
 The most common issue with Juno is broken PDU ports. The ports get stuck in ON mode so the board never reboots and can thus not interrupt the boot loader.
 Another common issue is "Failed to erase old recovery image" which is generally an issue with the SD card. It is solved as follows:
-Take brand new SD card and a root/sudo user on your SD reader capable *nix device
-Run "parted /dev/<diskID>
-mklabel msdos
-mkpart
+
+1. Take brand new SD card and a root/sudo user on your SD reader capable *nix device
+1. Run "parted /dev/<diskID>
+1. mklabel msdos
+1. mkpart
 primary
 fat16
 1M
