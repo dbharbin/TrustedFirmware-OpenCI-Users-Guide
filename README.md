@@ -367,22 +367,28 @@ In case the nightly job fails, an email notification is sent through the mailing
 
 The TF project uses yaml files to define Jenkins jobs (JJB) https://docs.openstack.org/infra/jenkins-job-builder/definition.html. Jobs currently defined for both projects are at https://git.trustedfirmware.org/ci/tf-m-job-configs.git/ and https://git.trustedfirmware.org/ci/tf-a-job-configs.git/. Job triggers are special types of jobs that listen to certain gerrit events. For example the job https://git.trustedfirmware.org/ci/tf-a-job-configs.git/tree/tf-gerrit-tforg-l1.yaml triggers every time a TF-A maintainer ‘Allows +1’ the CI to execute as defined the job’s trigger section 
 
+```
 .
 .
 .
 	triggers:
+	
 	- gerrit:
-    	server-name: review.trustedfirmware.org
+	
+	server-name: review.trustedfirmware.org
     	trigger-on:
-      	- comment-added-event:
+      		- comment-added-event:
           	approval-category: "Allow-CI"
           	approval-value: 1
     	projects:
+	
     	- project-compare-type: PLAIN
-      	project-pattern: TF-A/trusted-firmware-a
-      	branches:
-        	- branch-compare-type: PLAIN
-          	branch-pattern: integration
+    	
+      		project-pattern: TF-A/trusted-firmware-a
+      		branches:
+        		- branch-compare-type: PLAIN
+          		branch-pattern: integration
+```
 
 ## JJBs and Jenkins Jobs
 
