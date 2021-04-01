@@ -671,16 +671,18 @@ Another common issue is "Failed to erase old recovery image" which is generally 
 1. Run "parted /dev/<diskID>
 1. mklabel msdos
 1. mkpart
-primary
-fat16
-1M
-2G
-exit parted
-mkfs.fat16 /dev/<diskID> -n JUNO<details>
-Download the recovery image from a health check
-Unpack and copy contents to SD card.
-Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
-MPS2
+   a. primary
+   a. fat16
+   a. 1M
+   a. 2G
+1. exit parted
+1. mkfs.fat16 /dev/<diskID> -n JUNO<details>
+1. Download the recovery image from a health check
+1.Unpack and copy contents to SD card.
+1. Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
+
+## MPS2
+
 More details in Collaborate page: https://collaborate.linaro.org/display/CTT/MPS2 
 Peripherals
 Serial: Connected to serial console or usb serial connected to host.
