@@ -668,19 +668,18 @@ The most common issue with Juno is broken PDU ports. The ports get stuck in ON m
 Another common issue is "Failed to erase old recovery image" which is generally an issue with the SD card. It is solved as follows:
 
 1. Take brand new SD card and a root/sudo user on your SD reader capable *nix device
-1. Run "parted /dev/<diskID>
+1. Run "parted /dev/&ltdiskID>
 1. mklabel msdos
 1. mkpart
-   a. primary
-   a. fat16
-   a. 1M
-   a. 2G
+   1. primary
+   1. fat16
+   1. 1M
+   1. 2G
 1. exit parted
-1. mkfs.fat16 /dev/<diskID> -n JUNO<details>
+1. mkfs.fat16 /dev/&ltdiskID> -n JUNO&ltdetails>
 1. Download the recovery image from a health check
 1.Unpack and copy contents to SD card.
 1. Put a new card in a Juno device and run a health check. It might have umount issues on the first try. If so, try again.
-
 
 ## MPS2
 
