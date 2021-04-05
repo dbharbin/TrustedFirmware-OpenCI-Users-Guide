@@ -300,15 +300,15 @@ In case of a job failure, it is more likely that you want to investigate the iss
 
 ![Alt text](images/Jenkins-153.png "Gerrit job")
 
-1. tf-ci-gateway level:
+2. tf-ci-gateway level:
 
 ![Alt text](images/Jenkins-1174.png "Gateway level")
 
-1. tf-a-builder level:
+3. tf-a-builder level:
 
 ![Alt text](images/Jenkins-47759.png "Builder level")
 
-1. tf-a-builder’s console view:
+4. tf-a-builder’s console view:
 
 ![Alt text](images/Jenkins-console-output.png "Console view")
 
@@ -322,8 +322,7 @@ Per-patch job: gerrit patch verify before merge. Size S
 
 Below is a diagram that shows their relationship and the amount of code coverage targeted.
 
-
-
+![Alt text](images/Per-patch-diagram.png "Diagram")
 
 Jobs can also be classified depending on their specific task:
 
@@ -350,11 +349,11 @@ tf-m-build-config-infra-health
 
 When a patch arrives at https://review.trustedfirmware.org/ and reviewed, a maintainer may allow the CI to be executed, which in turn triggers tf-m-static. This is exactly the same CI workflow as TF-A. In case of failure, the job cannot be merge into the stable branch. The tf-m-static triggers many more jobs as seen in the picture below
 
-
+![Alt text](images/tf-m-cppcheck.png "Trigger flow")
 
 The job tf-m-nigthly is a more extensive job,  triggered everyday and tests the latest code (HEAD) at the project
 
-
+![Alt text](images/tf-m-nightly.png "Nightly flow")
 
 In case the nightly job fails, an email notification is sent through the mailing list https://lists.trustedfirmware.org/mailman/listinfo/tf-m-ci-notifications . The maintainer is responsible for looking at the failed errors and identifying the (commit) culprit then reporting it to the developer.
 
