@@ -1,8 +1,6 @@
-<header>
-TrustedFirmware OpenCI Users Guide
-</header>
+<h1>TrustedFirmware OpenCI Users Guide</h1>
 
-![Alt text](images/TF-Logo.png)
+![Alt text](images/TF-logo.png)
 
 **Table of Contents**
 [Intro](#users-guide)
