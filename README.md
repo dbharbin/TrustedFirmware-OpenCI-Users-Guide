@@ -2,10 +2,9 @@
 TrustedFirmware OpenCI Users Guide
 </header>
 
+**Table of Contents**
 [Intro](#users-guide)
 
-**Table of Contents**
-User Guide	4
 How to Contribute Code	4
 Gerrit Setup	4
 Commit and review	5
@@ -137,8 +136,7 @@ git review
 
 This command takes care of all the internal commands needed to send the patch to Gerrit, as seen below:
 
-
-
+![alt text](images/git-review.png)
 
 Once a patch is submitted, you must include one or more reviewers. The question then raises: who should I add as a reviewer? One  simple approach would be to look at the git history of the files you are modifying, and look for authors who have committed recently.
 
@@ -153,7 +151,7 @@ More details about Gerrit can be found in the upstream documentation:
 
 All CI is done with Jenkins at https://ci.trustedfirmware.org/. There are lots of jobs so as a first impression, it is difficult to follow the CI flow. Section 4, Pipeline description, describes each project’s CI in detail.
 
-
+![alt text](images/Jenkins-All.png)
 
 Each project, TF-A and TF-M, have different CI jobs and scripts hosted in the following repos
 
@@ -168,11 +166,11 @@ The job config repositories contain Jenkins Job Definitions, called JJB (Jenkins
 
 For patches that arrive at gerrit, the CI is explicitly triggered by a core maintainer. However there are cases where a particular job needs to be rebuilt. Jobs can be rebuilt at any level, from the trigger job to the job that builds or launches the LAVA execution. For example, the below picture shows a trigger job with the ‘Build with Parameters’ and ‘Rebuild last’ options. Both options allow the maintainer to change any job parameter before actually executing it.
 
-
+![alt text](images/Jenkins-tf-gerrit-tforg.png)
 
 Most  probably, you may want to go to a specific failed job and ‘Rebuild’
 
-
+![alt text](images/Jenkins-27960.png)
 
 There may be many reasons to rebuild but perhaps the most trivial one is to make sure the error is valid and not a transient one. Look at the job’s console for errors.
 
