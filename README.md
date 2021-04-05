@@ -166,11 +166,11 @@ The job config repositories contain Jenkins Job Definitions, called JJB (Jenkins
 
 For patches that arrive at gerrit, the CI is explicitly triggered by a core maintainer. However there are cases where a particular job needs to be rebuilt. Jobs can be rebuilt at any level, from the trigger job to the job that builds or launches the LAVA execution. For example, the below picture shows a trigger job with the ‘Build with Parameters’ and ‘Rebuild last’ options. Both options allow the maintainer to change any job parameter before actually executing it.
 
-<img src="images/Jenkins-tf-gerrit-tforg.png" width="120">
+<img src="images/Jenkins-tf-gerrit-tforg.png" width="240">
 
 Most  probably, you may want to go to a specific failed job and ‘Rebuild’
 
-![alt text](images/Jenkins-27960.png)
+<img src="images/Jenkins-27960.png" width="240">
 
 There may be many reasons to rebuild but perhaps the most trivial one is to make sure the error is valid and not a transient one. Look at the job’s console for errors.
 
@@ -180,8 +180,7 @@ There may be many reasons to rebuild but perhaps the most trivial one is to make
 
 TF project support the following platforms in LAVA https://tf.validation.linaro.org/scheduler/device_types
 
-
-
+![alt text](images/LAVA-device-types.png "LAVA Device Types")
 
 ### TF-A supported platforms
 
@@ -211,7 +210,7 @@ qemu https://tf.validation.linaro.org/scheduler/device_type/qemu.
 
 All LAVA jobs triggered by Jenkins are executed at the TF LAVA lab https://tf.validation.linaro.org/ instance. The Jenkins jobs that launches LAVA jobs are tf-a-builder https://ci.trustedfirmware.org/job/tf-a-builder/ and tf-m-lava-submit https://ci.trustedfirmware.org/job/tf-m-lava-submit/. The Jenkins jobs contain the corresponding LAVA id which can be used to find the corresponding job at https://tf.validation.linaro.org/. In case of tf-a-builder job, the LAVA log itself is fetched from LAVA lab and attached to the job as seeing below
 
-
+![alt text](images/Jenkins-49541.png "LAVA log")
 
 
 At the https://tf.validation.linaro.org/scheduler/alljobs jobs site, one can go to a particular job check results directly from LAVA
