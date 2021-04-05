@@ -136,7 +136,7 @@ git review
 
 This command takes care of all the internal commands needed to send the patch to Gerrit, as seen below:
 
-![alt text](images/git-review.png)
+![alt text](images/git-review.png "git review")
 
 Once a patch is submitted, you must include one or more reviewers. The question then raises: who should I add as a reviewer? One  simple approach would be to look at the git history of the files you are modifying, and look for authors who have committed recently.
 
@@ -151,7 +151,7 @@ More details about Gerrit can be found in the upstream documentation:
 
 All CI is done with Jenkins at https://ci.trustedfirmware.org/. There are lots of jobs so as a first impression, it is difficult to follow the CI flow. Section 4, Pipeline description, describes each project’s CI in detail.
 
-![alt text](images/Jenkins-All.png)
+![alt text](images/Jenkins-All.png "Jenkins job"){:height="36px" width="36px"}
 
 Each project, TF-A and TF-M, have different CI jobs and scripts hosted in the following repos
 
