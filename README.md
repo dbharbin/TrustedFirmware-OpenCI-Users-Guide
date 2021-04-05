@@ -212,20 +212,19 @@ All LAVA jobs triggered by Jenkins are executed at the TF LAVA lab https://tf.va
 
 ![alt text](images/Jenkins-49541.png "LAVA log")
 
-
 At the https://tf.validation.linaro.org/scheduler/alljobs jobs site, one can go to a particular job check results directly from LAVA
 
-
+![alt text](images/LAVA-tf-juno.png "LAVA job")
 
 One powerful feature is the possibility to resubmit jobs: this enables the user to quickly modify a job definition and test it without the need to retriggered from Jenkins.
 
-
+![alt text](images/Submit-job.png "Submit job")
 
 ## How to read a job and investigate results
 
 The entrypoint to read a job failure is looking at the job’s landing page, i.e. https://tf.validation.linaro.org/scheduler/job/74086 
 
-
+![alt text](images/LAVA-invalid-job.png "Invalid job")
 
 Depending on the device type and job definition, the output can vary considerably. One can filter out relevant logs by clicking the different log levels. As in any system, failures can occur at any time and for different reasons, i.e introduced by a user's patch or scripts/infrastructure. In any case, a core maintainer should monitor and report or fix it accordingly.
 
@@ -241,7 +240,7 @@ At the time of this writing, there are two (mostly) identical CIs, one running i
 
 Below is a general picture of the Trusted firmware A CI flow. Top boxes are Jenkins jobs, except those with .sh extensions. 
 
-
+![Alt text](images/tf-A-flow.png "TF-A Flow)
 
 The first job, the trigger-job, can be any job defined below, each covering a set of platforms and build/run configurations through test groups (TEST_GROUPS),  ultimately splitted as test descriptions (TEST_DESC). A  test description is tested by tf-a-builder job and a LAVA job is launched once artifacts are ready to be consumed.
 
