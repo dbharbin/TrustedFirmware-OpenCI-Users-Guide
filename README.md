@@ -1,7 +1,5 @@
+<img src="images/TF-logo.png" width="140">
 <h1>TrustedFirmware OpenCI Users Guide</h1>
-
-<img src="images/TF-logo.png" width="240">
-
 
 **Table of Contents**
 [Intro](#users-guide)
