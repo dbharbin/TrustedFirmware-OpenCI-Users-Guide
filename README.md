@@ -99,7 +99,7 @@ The Trusted Firmware core projects, TF-M and TF-A, are both open source projects
 
 TF projects use Gerrit https://review.trustedfirmware.org/dashboard/self as a centralized system to push, update, review and review patches. Contributors must push their patches to gerrit, so CI and reviewers can see the proposed change. One can see the open ones at https://review.trustedfirmware.org/q/status:open. 
 
-[](images/gerrit.png)
+![alt text](images/gerrit.png "Gerrit view")
 
 Once a patch is approved, one of the core maintainers merges it to the main branch (master) through Gerrit. The same cycle is repeated for every patch, where a patch series may be merged in one step.
 
