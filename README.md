@@ -2,7 +2,7 @@
 TrustedFirmware OpenCI Users Guide
 </header>
 
-![Alt test](images/TF-Logo.png)
+![Alt text](images/TF-Logo.png)
 
 **Table of Contents**
 [Intro](#users-guide)
