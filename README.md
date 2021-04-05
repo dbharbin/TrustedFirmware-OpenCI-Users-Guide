@@ -283,6 +283,8 @@ docker pull trustedfirmware/ci-amd64-ubuntu:bionic
 The result of tf-a-builder is a set of artifacts: binaries, build log, environment files, etc.
 
 ![Alt text](images/Jenkins-build-53395.png "artifacts example")
+<img src="images/Jenkins-build-53395.png" width="360">
+
 
 In particular, if build produces a LAVA definition file, job.yaml, a LAVA job is launched through SQUAD https://qa-reports.linaro.org/tf/. Once the LAVA job finishes, jenkins fetches the log from LAVA and stores it in the corresponding jenkins job. It is worth mentioning that not all tf-a-builder jobs produce a LAVA job, i.e fvp model not supported, ‘nil’ run configuration provided in the test description, static check, etc. however most FVP and Juno produce one. One can see all executed LAVA jobs at https://tf.validation.linaro.org/scheduler/alljobs.
 
