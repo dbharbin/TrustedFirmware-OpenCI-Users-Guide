@@ -240,7 +240,7 @@ At the time of this writing, there are two (mostly) identical CIs, one running i
 
 Below is a general picture of the Trusted firmware A CI flow. Top boxes are Jenkins jobs, except those with .sh extensions. 
 
-![Alt text](images/tf-A-flow.png "TF-A Flow)
+![Alt text](images/tf-A-flow.png "TF-A Flow")
 
 The first job, the trigger-job, can be any job defined below, each covering a set of platforms and build/run configurations through test groups (TEST_GROUPS),  ultimately splitted as test descriptions (TEST_DESC). A  test description is tested by tf-a-builder job and a LAVA job is launched once artifacts are ready to be consumed.
 
@@ -264,15 +264,15 @@ tf-a-builder: freestyle, builds the package and launch a LAVA job
 
 Any job can be triggered manually by authorized users. Gerrit jobs are those triggered on behalf of gerrit actions, either ‘Allow +1’ or ‘Allow +2’, and track a particular project, either TF-A https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/ or TF-A tests https://git.trustedfirmware.org/TF-A/tf-a-tests.git/. The following screenshot shows and example of the tf-gerrit-tforg-l1 job at the Jenkins instance
 
-
+![Alt text](images/Jenkins-build-158.png "tf-gerrit job")
 
 The tf-gerrit-tforg-l1 indicates the tracking project, tf-gerrit-tforg-l1, and the level, tf-gerrit-tforg-l1. Levels indicate testing depth (test descriptions coverage) and are used in different phases in the development phase as seen below
 
-
+![Alt text](images/ci-jobs-triggered-by-gerrit.png "jobs trigger")
 
 The job tf-daily runs daily, uses the latest code (the HEAD commit) and triggers two jobs: tf-main and tf-coverity. The job tf-main is the one covering most platforms so it takes longer to complete (approximately 1.5 hours)
 
-
+![Alt text](images/overnight-ci-job.png "Overnight job")
 
 Notice that the  tf-main job also triggers tf-static-checks, the job that launches project-related static checks (copyright presence, headers in alphabetical order, line endings, coding style and banned APIs) and execute Clang static analyzer (scan-build). The job tf-coverity runs the Coverity static code check and reports metrics (defects) at https://scan.coverity.com/projects/arm-software-arm-trusted-firmware?tab=overview
 
@@ -282,7 +282,7 @@ docker pull trustedfirmware/ci-amd64-ubuntu:bionic
 
 The result of tf-a-builder is a set of artifacts: binaries, build log, environment files, etc.
 
-
+![Alt text](images/Jenkins-build-53395.png "artifacts example")
 
 In particular, if build produces a LAVA definition file, job.yaml, a LAVA job is launched through SQUAD https://qa-reports.linaro.org/tf/. Once the LAVA job finishes, jenkins fetches the log from LAVA and stores it in the corresponding jenkins job. It is worth mentioning that not all tf-a-builder jobs produce a LAVA job, i.e fvp model not supported, ‘nil’ run configuration provided in the test description, static check, etc. however most FVP and Juno produce one. One can see all executed LAVA jobs at https://tf.validation.linaro.org/scheduler/alljobs.
 
