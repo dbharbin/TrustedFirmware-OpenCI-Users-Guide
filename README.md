@@ -395,7 +395,7 @@ JJB files themselves do not do much unless they execute something useful. CI scr
 
 In general, Jenkins jobs call scripts, the latter do the corresponding task. For example, below is shown again CI flow for the TF-A project
 
-
+![Alt text](images/tf-A-flow.png "TF-A flow")
 
 Where builders.sh is just a setup script (located at TF-A jobs repo) that finally calls run_local_ci.sh script located CI scripts repo, which is the entrypoint of the script execution. The run_local_ci.sh in turn calls others scripts that finally builds the package.
 
@@ -405,6 +405,7 @@ Where builders.sh is just a setup script (located at TF-A jobs repo) that finall
 
 The TF-A CI repository https://git.trustedfirmware.org/ci/tf-a-ci-scripts.git/ contains several folders and scripts for different purposes but we will not describe each one. Instead we will overview build package operation. Building a package means building (compiling) a specific platform with certain build parameters and post-build setup tasks, both indicated in a single test configuration (string or filename). The  operation is depicted in the following diagram
 
+![Alt text](images/Test-configuration.png "Test configuration")
 
 The test configuration concisely specifies a single test: what set of images to build, how to build them, and finally, how to run a test using the aforementioned images. A test configuration is a specially-named plain text file whose name comprises two parts: the build configuration and the run configuration.
 
@@ -1079,17 +1080,17 @@ Please **ensure** any **triggers** (timed based etc) are disabled. And please en
 
 This is the workflow for creating ‘per-user’ jenkins jobs in staging instance. next/ci/tf-a-job-configs.git repository should be used in this case.
 
+[Alt text](images/tf-a-job-configs.png "Job configs flow")
 
 ### Workflow for other repositories
 
 Other repositories, that are used inside the jobs, can be copied to other server (for example git.linaro.org). This should be added as a new remote to the existing repository. After changes are made and work well, they should be sent for review. Example below:
 
+[Alt text](images/tf-a-ci-scripts.png "TF-A scripts flow")
 
 Similar workflow should be used when migrating changes to ci/tf-a-scripts and ci/tf-a-job-configs repositories. Changes in the next/* should be sent for review against repositories in ci/* path. 
 
 As noted above, changes in next/tf-a-job-configs can be self approved and merged. Changes in user repositories can be pushed without reviews.
-
-
 
 # Misc Info
 
