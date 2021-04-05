@@ -166,7 +166,7 @@ The job config repositories contain Jenkins Job Definitions, called JJB (Jenkins
 
 For patches that arrive at gerrit, the CI is explicitly triggered by a core maintainer. However there are cases where a particular job needs to be rebuilt. Jobs can be rebuilt at any level, from the trigger job to the job that builds or launches the LAVA execution. For example, the below picture shows a trigger job with the ‘Build with Parameters’ and ‘Rebuild last’ options. Both options allow the maintainer to change any job parameter before actually executing it.
 
-![alt text](images/Jenkins-tf-gerrit-tforg.png){:height="25%" width="25%"}
+![alt text](images/Jenkins-tf-gerrit-tforg.png height="28" width="28")
 
 Most  probably, you may want to go to a specific failed job and ‘Rebuild’
 
