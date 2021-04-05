@@ -1080,13 +1080,13 @@ Please **ensure** any **triggers** (timed based etc) are disabled. And please en
 
 This is the workflow for creating ‘per-user’ jenkins jobs in staging instance. next/ci/tf-a-job-configs.git repository should be used in this case.
 
-[Alt text](images/tf-a-job-configs.png "Job configs flow")
+![Alt text](images/tf-a-job-configs.png "Job configs flow")
 
 ### Workflow for other repositories
 
 Other repositories, that are used inside the jobs, can be copied to other server (for example git.linaro.org). This should be added as a new remote to the existing repository. After changes are made and work well, they should be sent for review. Example below:
 
-[Alt text](images/tf-a-ci-scripts.png "TF-A scripts flow")
+![Alt text](images/tf-a-ci-scripts.png "TF-A scripts flow")
 
 Similar workflow should be used when migrating changes to ci/tf-a-scripts and ci/tf-a-job-configs repositories. Changes in the next/* should be sent for review against repositories in ci/* path. 
 
