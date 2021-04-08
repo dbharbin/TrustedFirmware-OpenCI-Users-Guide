@@ -35,19 +35,27 @@ Once the project is cloned, there are some two extra steps to setup gerrit prope
 
 For example, under the TF-A project, use the following command  to add the remote
 
+```
 $ git remote add gerrit ssh://<gerrit user>@review.trustedfirmware.org:29418/TF-A/trusted-firmware-a
+```
 
 For TF-M, the same command applies except that remote’s url is a bit different
 
+```
 $ git remote add gerrit ssh://<gerrit user>@review.trustedfirmware.org:29418/TF-M/trusted-firmware-m
+```
 
 As a safety check, run the command git remote -v and make sure gerrit remote is present. The next step is to install the git-review package in your corresponding Linux distribution.  For example, on Ubuntu this would be
 
+```
 $ sudo apt install git-review
+```
 
 and finally define the gerrit remote to be used with the following command
 
+```
 $ git review -r
+```
 
 If no issues are found at this point, you should be ready to start contributing to the project!
 
@@ -57,7 +65,9 @@ No matter what change you want to make in any repository, one needs to create on
 
 Once your commits are ready, type
 
+```
 git review
+```
 
 This command takes care of all the internal commands needed to send the patch to Gerrit, as seen below:
 
@@ -117,9 +127,9 @@ FVP models are virtual platforms that are able to emulate specific Arm reference
 
 These models are present on several docker images and LAVA uses these to boot and test a particular model. The specific docker image and model type is defined at the (LAVA)  job definition. Docker images (containing the models) are available in a private docker registry (987685672616.dkr.ecr.us-east-1.amazonaws.com) that LAVA has access. At the time of this writing,  these are the docker image names
 
-fvp:fvp_base_revc-2xaemv8a_11.12_38
-fvp:foundation_platform_11.12_38
-fvp:fvp_arm_std_library_11.12_38
+* fvp:fvp_base_revc-2xaemv8a_11.12_38
+* fvp:foundation_platform_11.12_38
+* fvp:fvp_arm_std_library_11.12_38
 
 Tag name, i.e. fvp_base_revc-2xaemv8a_11.12_38, corresponds to the particular model download from https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms.
 
@@ -127,9 +137,10 @@ Tag name, i.e. fvp_base_revc-2xaemv8a_11.12_38, corresponds to the particular mo
 ### TF-M supported platforms
 
 TF-M LAVA devices are:
-mps https://tf.validation.linaro.org/scheduler/device_type/mps
-musca_b https://tf.validation.linaro.org/scheduler/device_type/musca-b
-qemu https://tf.validation.linaro.org/scheduler/device_type/qemu. 
+
+* mps https://tf.validation.linaro.org/scheduler/device_type/mps
+* musca_b https://tf.validation.linaro.org/scheduler/device_type/musca-b
+* qemu https://tf.validation.linaro.org/scheduler/device_type/qemu. 
 
 ## How to navigate tf.validation.linaro.org
 
