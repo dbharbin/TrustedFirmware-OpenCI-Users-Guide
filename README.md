@@ -1049,7 +1049,7 @@ The general steps/guidelines for getting hardware placed into the lab is as foll
 * Deliver a "LAVA Ready" package when it's wanted to add hardware to the OpenCI hardware farm. This includes the following:
    * 5 identical platforms of the type wanting to place into the lab;
       * Mailing address here: Linaro Ltd, Harston Mill, Royston Road, Harston, Cambridge, CB22 7GG, United Kingdom
-   * Develop and validate the LAVA Device_Type in a local lab first to assure the board is enabled. This is preferably upstreamed into the LAVA project. This is the development of a YAML file describing how LAVA can interact to the device thru multiple scenarios like rescue, serial, power cycle, boot flow, etc...
+   * Develop and validate the LAVA [Device_Type](https://master.lavasoftware.org/static/docs/v2/devicetypes.html) in a local lab first to assure the board is enabled. This is preferably upstreamed into the LAVA project. This is the development of a YAML file describing how LAVA can interact to the device thru multiple scenarios like rescue, serial, power cycle, boot flow, etc...
    * Provide any information on how to health check the device. Typically a set of boot checks, verifying that the board comes up to a prompt, or firmware version as some examples
    * Provide an Automation Guide: This includes the things about the device that will cause automation complexities. Examples might be power control, ways to interact w/ UART, cooling expectations, powering (USB or other), uniquely identifiable before f/w is up.
 * Delivery of all items (except the hardware) to the OpenCI development team will help them to size the effort and more accurately plan the team's activity pipeline.
