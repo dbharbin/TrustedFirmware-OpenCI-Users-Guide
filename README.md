@@ -120,8 +120,9 @@ TF project support the following platforms in LAVA https://tf.validation.linaro.
 ### TF-A supported platforms
 
 Until recently, the only supported platform was the Juno board but now it also supports FVP models:
-https://tf.validation.linaro.org/scheduler/device_type/juno
-https://tf.validation.linaro.org/scheduler/device_type/fvp
+
+* https://tf.validation.linaro.org/scheduler/device_type/juno
+* https://tf.validation.linaro.org/scheduler/device_type/fvp
 
 FVP models are virtual platforms that are able to emulate specific Arm reference designs or platforms. See the Arm documentation for more details: https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms 
 
@@ -154,7 +155,7 @@ At the https://tf.validation.linaro.org/scheduler/alljobs jobs site, one can go 
 
 One powerful feature is the possibility to resubmit jobs: this enables the user to quickly modify a job definition and test it without the need to retriggered from Jenkins.
 
-![alt text](images/Submit-job.png "Submit job")
+![alt text](images/Submit-Job.png "Submit job")
 
 ## How to read a job and investigate results
 
