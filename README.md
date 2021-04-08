@@ -570,7 +570,7 @@ Ultimately, the job.yaml file above is the LAVA job definition, which contains t
 
 The TF LAVA instance can be found at http://tf.validation.linaro.org.
 
-LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
+LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. Note that this is required by certain classes of hardware not being differentiable before the OS boots, therefore a single device per dispatcher allows addressing these devices via an unique dispatcher (per device).
 
 TF LAVA instance settings are stored in salt and ansible repositories:
 * Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
@@ -798,7 +798,7 @@ Once your board is supported in the LAVA software, and your board meets the Hard
    * It's probably a good idea to add Don Harbin to the Watchers on the ticket.
 
 # TF LAVA instance
-The [LAVA instance](https://tf.validation.linaro.org) for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
+The [LAVA instance](https://tf.validation.linaro.org) for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. Note that this is required by certain classes of hardware not being differentiable before the OS boots, therefore a single device per dispatcher allows addressing these devices via an unique dispatcher (per device).
 
 TF LAVA instance settings are stored in salt and ansible repositories:
 * Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
