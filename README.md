@@ -4,86 +4,15 @@
 **Table of Contents**
 [Intro](#users-guide)
 
-How to Contribute Code	4
-Gerrit Setup	4
-Commit and review	5
-From the maintainer's POV	6
-Manual Job trigger	7
-LAVA documentation	8
-Supported platforms	8
-TF-A supported platforms	8
-TF-M supported platforms	9
-How to navigate tf.validation.linaro.org	9
-How to read a job and investigate results	10
-Pipeline description	12
-TF-A CI pipeline description	12
-TF-M CI pipeline description	18
-TF-M Job dependencies	19
-The TF Jenkins Job Builder (JJB) configs	20
-JJBs and Jenkins Jobs	21
-Calling CI scripts from JJB jobs	21
-CI Scripts overview	23
-TF-A CI scripts overview	23
-TF-M CI scripts overview	26
-TF LAVA Instance	27
-TF LAVA instance replication	27
-LAVA Master	28
-LAVA Dispatchers	28
-Upgrades	28
-LAVA instance changes	28
-Current list of available devices	29
-Local LAVA instance set up	29
-New device enablement in LAVA	29
-Board setup	29
-Juno	29
-Peripherals	29
-Deployment	29
-Troubleshooting	29
-MPS2	30
-Peripherals	30
-Deployment	30
-Troubleshooting	30
-Musca B1	31
-Flashing the device for the first time.	31
-Turn on automation	31
-Turn auto power on	31
-Adding Boards to LAVA	31
-Hardware Requirements	31
-How to get your board installed in the Linaro Cambridge Lab	32
-TF LAVA instance - tf.validation.linaro.org	33
-TF LAVA instance replication	33
-LAVA Master	34
-LAVA Dispatchers	34
-Upgrades	34
-LAVA instance changes	34
-Current list of available devices	35
-Local LAVA instance set up	35
-New device enablement in LAVA	35
-Board setup	35
-Juno	35
-Peripherals	35
-Deployment	35
-Troubleshooting	35
-MPS2	36
-Peripherals	36
-Deployment	36
-Troubleshooting	36
-Musca B1	37
-Flashing the device for the first time.	37
-Turn on automation	37
-Turn auto power on	37
-SQUAD	38
-TF-A	38
-TF-M	38
-Staging Trusted Firmware System	39
-Brief description of the setup	39
-Rules & Environment setup	39
-How to setup basic next environment	40
-Workflow for next/tf-a-job-configs.git	41
-Workflow for other repositories	42
-Misc Info	43
-Relevant Tickets	43
-Slides	43
+**Table of Contents**
+
+- [User Guide](#user-guide)
+  * [How to Contribute Code](#how-to-contribute-code)
+    + [Gerrit Setup](#gerrit-setup)
+    + [Commit and review](#commit-and-review)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 <a name="users-guide"/>
 
