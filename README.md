@@ -576,11 +576,11 @@ Up-to-date list of devices is available from the LAVA web UI. A simplified view 
 
 # Local LAVA instance set up
 
-Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official LAVA’s docker-compose repository and follow the README instructions.
+Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official [LAVA’s docker-compose repository](https://git.lavasoftware.org/lava/pkg/docker-compose) and follow the [README instructions](https://git.lavasoftware.org/lava/pkg/docker-compose/-/blob/master/README.md).
 
 # New device enablement in LAVA
 
-Enabling new devices in LAVA is described in the LAVA documentation.
+Enabling new devices in LAVA is described in the [LAVA documentation](https://master.lavasoftware.org/static/docs/v2/devicetypes.html).
 
 # Board setup
 
@@ -597,7 +597,7 @@ Storage: SSD and USB stick (for boot image).
 
 ### Deployment
 
-After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found here.
+After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found [here](https://images.validation.linaro.org/snapshots.linaro.org/openembedded/lkft/lkft/sumo/juno/lkft/linux-stable-rc-5.1/62/juno-oe-uboot.zip).
 
 ### Troubleshooting
 
@@ -632,17 +632,17 @@ Ethernet: One port connected.
 
 USB: Mini usb connected to host.
 
-Storage: sd card in an SD Mux.
+Storage: sd card in an [SD Mux](https://www.linux-automation.com/en/).
 
 ### Deployment
 
-The technical reference manual can be found here.
+The technical reference manual can be found [here](https://developer.arm.com/tools-and-software/development-boards/fpga-prototyping-boards/mps2).
 
-An example health check with an image to use for deployment on MPS2 devices.
+An example [health check](https://tf.validation.linaro.org/scheduler/job/53307/definition) with an image to use for deployment on MPS2 devices.
 
-There is also access to a device dictionary which describes the process of using SDMux with the board.
+There is also access to a [device dictionary](https://tf.validation.linaro.org/scheduler/device/mps2-04/devicedict) which describes the process of using SDMux with the board.
 
-In order to use SDMux, the host must have sd-mux-ctrl installed.
+In order to use SDMux, the host must have [sd-mux-ctrl](https://wiki.tizen.org/SD_MUX#Software) installed.
 
 ### Troubleshooting
 
@@ -650,7 +650,7 @@ We found that the sd card containing the boot image easily got corrupted and tha
 
 This is mitigated with use of the SDMux and there have been few known issues since.
 
-SD Mux can be bought from https://shop.linux-automation.com/.
+[SD Mux](https://shop.linux-automation.com/) can be bought from https://shop.linux-automation.com/.
 
 ## Musca B1
 
@@ -658,11 +658,11 @@ More details in Collaborate page: https://collaborate.linaro.org/display/CTT/Mus
 
 ### Flashing the device for the first time
 
-Flashing instructions are available on ARM community pages. It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
+Flashing instructions are available on [ARM community pages](https://community.arm.com/developer/tools-software/oss-platforms/w/docs/552/musca-b1-firmware-update-qspi-eflash-boot-recovery). It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
 
-firmware: DAPLink_QSPI_V34.bin
+firmware: [DAPLink_QSPI_V34.bin](https://collaborate.linaro.org/download/attachments/132161009/DAPLink_QSPI_V34.bin?version=1&modificationDate=1596628064578&api=v2)
 
-After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on ARMmbed Github repository.
+After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on [ARMmbed Github repository](https://github.com/ARMmbed/DAPLink/blob/master/docs/MSD_COMMANDS.md).
 
 ### Turn on automation
 
@@ -685,9 +685,9 @@ Once your device type is supported in LAVA, and the LAVA software deployed to th
 ## Hardware Requirements
 
 The Lab has some basic Hardware Requirements for boards being installed in the lab. It's advisable to read the "Automation and hardware design" and "LAB Device Deployment Guide" pages for more detailed information:
-	https://collaborate.linaro.org/display/CTT/Automation+and+hardware+design
-	
-	https://collaborate.linaro.org/display/CTT/LAB+Device+Deployment+Guide
+
+* https://collaborate.linaro.org/display/CTT/Automation+and+hardware+design
+* https://collaborate.linaro.org/display/CTT/LAB+Device+Deployment+Guide
 
 Basic requirements:
 
@@ -723,9 +723,8 @@ Once your board is supported in the LAVA software, and your board meets the Hard
 1. Add Watchers
    * It's probably a good idea to add Don Harbin to the Watchers on the ticket.
 
-# TF LAVA instance - tf.validation.linaro.org
-
-LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
+# TF LAVA instance
+The [LAVA instance](https://tf.validation.linaro.org) for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
 
 TF LAVA instance settings are stored in salt and ansible repositories:
 * Salt repository: https://git.linaro.org/lava/lava-lab.git/ 
@@ -756,7 +755,7 @@ The following playbooks are used to configure all the relevant parts:
 * lab_lava_repo.yml file: add LAVA apt repository
 * dhcp_tf.yml file: for the static leases and general DHCP server configuration
 
-Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate lava-lab repository.
+Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate [lava-lab repository](https://git.linaro.org/lava/lava-lab.git).
 
 Until the salt migration to ansible is complete you will need to go on tf-master.tflab host (ssh root@10.88.16.10). As root:
 ```
@@ -797,15 +796,15 @@ Most common cases where ticket is required include:
 
 ## Current list of available devices
 
-Up-to-date list of devices is available from the LAVA web UI. A simplified view shows only the device types. Currently, TF LAVA instance has Juno, MPS2, Musca B1 and QEMU devices.
+Up-to-date list of devices is available from the [LAVA web UI](https://tf.validation.linaro.org/scheduler/alldevices/active). A [simplified view](https://tf.validation.linaro.org/scheduler/) shows only the device types. Currently, TF LAVA instance has Juno, MPS2, Musca B1 and QEMU devices.
 
 # Local LAVA instance set up
 
-Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official LAVA’s docker-compose repository and follow the README instructions.
+Setting up a local LAVA instance that can be used for debugging or improving LAVA code, as well as new device enablement can be done in a few ways. The easiest is to use the official [LAVA’s docker-compose repository](https://git.lavasoftware.org/lava/pkg/docker-compose) and follow the [README instructions](https://git.lavasoftware.org/lava/pkg/docker-compose/-/blob/master/README.md).
 
 # New device enablement in LAVA
 
-Enabling new devices in LAVA is described in the LAVA documentation.
+Enabling new devices in LAVA is described in the [LAVA documentation](https://master.lavasoftware.org/static/docs/v2/devicetypes.html).
 
 # Board setup
 
@@ -824,7 +823,7 @@ Storage: SSD and USB stick (for boot image).
 
 ### Deployment
 
-After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found here.
+After various iterations of deployment methods, the current method is loading a master image on SD card or USB stick, and booting a known good image from that. The known good image can be found [here](https://images.validation.linaro.org/snapshots.linaro.org/openembedded/lkft/lkft/sumo/juno/lkft/linux-stable-rc-5.1/62/juno-oe-uboot.zip).
 
 ### Troubleshooting
 
@@ -859,17 +858,17 @@ Ethernet: One port connected.
 
 USB: Mini usb connected to host.
 
-Storage: sd card in an SD Mux.
+Storage: sd card in an [SD Mux](https://www.linux-automation.com/en/).
 
 ### Deployment
 
 The technical reference manual can be found here.
 
-An example health check with an image to use for deployment on MPS2 devices.
+An example [health check](https://tf.validation.linaro.org/scheduler/job/53307/definition) with an image to use for deployment on MPS2 devices.
 
-There is also access to a device dictionary which describes the process of using SDMux with the board.
+There is also access to a [device dictionary](https://tf.validation.linaro.org/scheduler/device/mps2-04/devicedict) which describes the process of using SDMux with the board.
 
-In order to use SDMux, the host must have sd-mux-ctrl installed.
+In order to use SDMux, the host must have [sd-mux-ctrl](https://wiki.tizen.org/SD_MUX#Software) installed.
 
 ### Troubleshooting
 
@@ -877,7 +876,7 @@ We found that the sd card containing the boot image easily got corrupted and tha
 
 This is mitigated with use of the SDMux and there have been few known issues since.
 
-SD Mux can be bought from https://shop.linux-automation.com/.
+[SD Mux](https://shop.linux-automation.com/) can be bought from https://shop.linux-automation.com/.
 
 ## Musca B1
 
@@ -885,11 +884,11 @@ More details in Collaborate page: https://collaborate.linaro.org/display/CTT/Mus
 
 ### Flashing the device for the first time.
 
-Flashing instructions are available on ARM community pages. It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
+Flashing instructions are available on [ARM community pages](https://community.arm.com/developer/tools-software/oss-platforms/w/docs/552/musca-b1-firmware-update-qspi-eflash-boot-recovery). It's only possible to run the Windows version of the instructions. Currently LAB uses QSPI firmware version 3.4.
 
-firmware: DAPLink_QSPI_V34.bin
+firmware: [DAPLink_QSPI_V34.bin](https://collaborate.linaro.org/download/attachments/132161009/DAPLink_QSPI_V34.bin?version=1&modificationDate=1596628064578&api=v2)
 
-After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on ARMmbed Github repository.
+After initial flashing is done, the rest of the setup can be done with a Linux host. Some commands for DAPLink can be found on [ARMmbed Github repository](https://github.com/ARMmbed/DAPLink/blob/master/docs/MSD_COMMANDS.md).
 
 ### Turn on automation
 
@@ -928,7 +927,6 @@ There are other project, but the details
 # Staging Trusted Firmware System
 
 This was documented here, but has been copied here as we approach wider review:
-
 	https://docs.google.com/document/d/1qYEdhrYldBcnpVPNIYXG30n0CP8KUrF3DMq_EfAI43I/edit#heading=h.5y1mh3kp9xzw
 	
 ## Brief description of the setup
@@ -950,7 +948,7 @@ Staging environments have been set up in the next/* namespace location:
 
 The next/* namespace is mirrored from production. The only repository that is not mirrored is the tf-<x>-job-configs repo. All other repositories are mirrored and as such the user should branch out from master.
 
-Users need to be placed in the `trusted-firmware-staging-approvers` Gerrit group. This is done by creating a ticket, please see instructions at the bottom of the Open CI wiki page. This group allows users to have submit and merge (+2) writes to all repositories under the next/* namespace, without needing any approval from a peer.
+Users need to be placed in the `[trusted-firmware-staging-approvers](https://review.trustedfirmware.org/admin/groups)` Gerrit group. This is done by creating a ticket, [please see instructions at the bottom of the Open CI wiki page](https://developer.trustedfirmware.org/w/collaboration/openci/). This group allows users to have submit and merge (+2) writes to all repositories under the next/* namespace, without needing any approval from a peer.
 
 Due to the nature of allowing users to self approve their submit/merge changes into Gerrit, it is important that users understand that it triggers Jenkins jobs and as such care has to be taken when deploying those changes.
 
@@ -998,9 +996,9 @@ for project in tf-a-ci-scripts tf-a-job-configs tf-m-ci-scripts tf-m-job-configs
 done
 ```
 
-I recommend the user to read https://jigarius.com/blog/multiple-git-remote-repositories for understanding two remotes. 
+It's recommended that the user read https://jigarius.com/blog/multiple-git-remote-repositories for understanding two remotes. 
 
-Once in this environment, it is recommended the user then checkouts a new dev location and works from that. then copy the <job_name>.yaml file. This should be the same for the <scripts> location too. Once set up it is recommended that the user appends these changes to the job config.
+Once in this environment, it is recommended the user then checkouts a new dev location and works from that. then copy the \<job_name>.yaml file. This should be the same for the \<scripts> location too. Once set up it is recommended that the user appends these changes to the job config.
 
 ```
   - authorization:
@@ -1052,27 +1050,6 @@ TF-CI Phase 2: CI user guide and document how to deploy local instance
 
 	https://docs.google.com/presentation/d/1NQw0-Uc_cmmxz30i_-cBsG9jBCr6uUYR-CD1eKEsk2I/edit?usp=sharing
 
-\# M11 Documentation and User Guide  (10 days timeboxed)
 
-1. User Guide
-   1. From the TF *code* developer's perspective: "what do I do?"
-   1. submit a gerrit review, get results reported in gerrit review
-
-1. From the maintainer's POV
-   1. how to navigate ci.trustedfirmware.org
-   1. how to trigger jobs, and track results
-
-1. LAVA documentation (from the user's POV, not developer)
-   1. which platforms are supported for each project
-   1. how to navigate tf.validation.linaro.org
-   1. how to read a job and investigate results
-
-1. Pipeline description
-   1. How is the CI structured?
-   1. Start with the Jenkins Job Builder (JJB) configs
-   1. show how they create jobs on ci.trustedfirmware.org
-   1. show how they hook into tf-[am]-ci-scripts.org
-
-1. tf-[am]-ci-scripts Overview
 
 
