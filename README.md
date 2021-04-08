@@ -185,13 +185,13 @@ The first job, the trigger-job, can be any job defined below, each covering a se
 
 In terms of the trigger source, jobs can be classified by either gerrit or scheduled
 
-*Gerrit:
+* Gerrit:
 
    * **tf-gerrit-tforg-l1:** multijob, Allow +1, TF-A
    * **tf-gerrit-tforg-l2:** multijob, Allow +2, TF-A
    * **tf-tftf-gerrit-tforg-l1:** multijob, Allow +1, TF-A-tests
    * **tf-tftf-gerrit-tforg-l2:** multijob, Allow +2, TF-A-tests
-    
+  
 * Scheduled: daily triggered
 
    * **tf-daily:** scheduled daily
@@ -220,7 +220,9 @@ Notice that the  tf-main job also triggers tf-static-checks, the job that launch
 
 The job tf-a-builder is the builder job and its execution is containerized inside  docker-amd64-tf-a-bionic defined at https://git.trustedfirmware.org/ci/dockerfiles.git/ repository. Anyone can fetch it with the following command and use it for local compilation
 
+```
 docker pull trustedfirmware/ci-amd64-ubuntu:bionic
+```
 
 The result of tf-a-builder is a set of artifacts: binaries, build log, environment files, etc.
 
