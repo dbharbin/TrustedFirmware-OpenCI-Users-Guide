@@ -157,7 +157,7 @@ At the https://tf.validation.linaro.org/scheduler/alljobs jobs site, one can go 
 
 One powerful feature is the possibility to resubmit jobs: this enables the user to quickly modify a job definition and test it without the need to retriggered from Jenkins.
 
-![alt text](images/Submit-Job.png "Submit job")
+<img src="images/Submit-Job.png" width="480">
 
 ## How to read a job and investigate results
 
@@ -185,21 +185,24 @@ The first job, the trigger-job, can be any job defined below, each covering a se
 
 In terms of the trigger source, jobs can be classified by either gerrit or scheduled
 
-Gerrit:
-tf-gerrit-tforg-l1: multijob, Allow +1, TF-A
-tf-gerrit-tforg-l2: multijob, Allow +2, TF-A
-tf-tftf-gerrit-tforg-l1: multijob, Allow +1, TF-A-tests
-tf-tftf-gerrit-tforg-l2: multijob, Allow +2, TF-A-tests
-Scheduled: daily triggered
-tf-daily: scheduled daily
+*Gerrit:
+
+   * **tf-gerrit-tforg-l1:** multijob, Allow +1, TF-A
+   * **tf-gerrit-tforg-l2:** multijob, Allow +2, TF-A
+   * **tf-tftf-gerrit-tforg-l1:** multijob, Allow +1, TF-A-tests
+   * **tf-tftf-gerrit-tforg-l2:** multijob, Allow +2, TF-A-tests
+    
+* Scheduled: daily triggered
+
+   * **tf-daily:** scheduled daily
 
 All the above jobs rely on downstream jobs, 
 
-tf-main: multijob, TF-A and TF-A-tests
-tf-coverity: freestyle, runs coverity scan
-tf-static-checks: runs Arm static code checks
-tf-ci-gateway: split a test group (TEST_GROUPS) into multiple ‘.test’ files, each representing a test description (TEST_DESC)
-tf-a-builder: freestyle, builds the package and launch a LAVA job
+* **tf-main:** multijob, TF-A and TF-A-tests
+* **tf-coverity:** freestyle, runs coverity scan
+* **tf-static-checks:** runs Arm static code checks
+* **tf-ci-gateway:** split a test group (TEST_GROUPS) into multiple ‘.test’ files, each representing a test description (TEST_DESC)
+* **tf-a-builder:** freestyle, builds the package and launch a LAVA job
 
 Any job can be triggered manually by authorized users. Gerrit jobs are those triggered on behalf of gerrit actions, either ‘Allow +1’ or ‘Allow +2’, and track a particular project, either TF-A https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/ or TF-A tests https://git.trustedfirmware.org/TF-A/tf-a-tests.git/. The following screenshot shows and example of the tf-gerrit-tforg-l1 job at the Jenkins instance
 
