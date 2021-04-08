@@ -260,9 +260,9 @@ In case of a job failure, it is more likely that you want to investigate the iss
 
 TF-M jobs are found at https://ci.trustedfirmware.org/ and can be classified depending on the code coverage
 
-Release job: active during release stage, manually triggered. XL size
-Nightly job: active everyday to cover latest HEAD; in case of failure, notification is done through the tf-m mailing list. M size
-Per-patch job: gerrit patch verify before merge. Size S
+* Release job: active during release stage, manually triggered. XL size
+* Nightly job: active everyday to cover latest HEAD; in case of failure, notification is done through the tf-m mailing list. M size
+* Per-patch job: gerrit patch verify before merge. Size S
 
 Below is a diagram that shows their relationship and the amount of code coverage targeted.
 
@@ -270,24 +270,24 @@ Below is a diagram that shows their relationship and the amount of code coverage
 
 Jobs can also be classified depending on their specific task:
 
-Production jobs
-tf-m-builds-docs-nightly
-tf-m-build-and-test
-tf-m-coverity
-tf-m-static-checks
-tf-m-nightly (scheduled)
-tf-m-static (per-patch)
-tf-m-build-docs
-tf-m-build-config
-tf-m-lava-submit
-tf-m-cppcheck
-tf-m-checkpatch
-Release jobs
-tf-m-release (release)
-tf-m-code-coverage
-Infra jobs
-tf-m-infra-health
-tf-m-build-config-infra-health
+* Production jobs
+   * tf-m-builds-docs-nightly
+   * tf-m-build-and-test
+   * tf-m-coverity
+   * tf-m-static-checks
+   * tf-m-nightly (scheduled)
+   * tf-m-static (per-patch)
+   * tf-m-build-docs
+   * tf-m-build-config
+   * tf-m-lava-submit
+   * tf-m-cppcheck
+   * tf-m-checkpatch
+* Release jobs
+   * tf-m-release (release)
+   * tf-m-code-coverage
+* Infra jobs
+   * tf-m-infra-health
+   * tf-m-build-config-infra-health
 
 ### TF-M Job dependencies
 
@@ -366,9 +366,7 @@ That is, it contains:
 * Mandatory run configuration, or nil for build-only configs.
 
 The TF and TFTF build configs are separated by a comma; the build and run configs are separated by a colon. The test configuration is consumed by the build script , and produces a build package. For example, the test configuration 
-```
 fvp-default,fvp-default:fvp-tftf-fip.tftf-aemv8a-debug chooses:
-```
 
 * To build TF with the fvp-default config;
 * To build TFTF with the fvp-default config;
