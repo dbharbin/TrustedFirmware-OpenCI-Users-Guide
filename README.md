@@ -494,7 +494,7 @@ Ultimately, the job.yaml file above is the LAVA job definition, which contains t
 
 # TF LAVA Instance
 
-The TF LAVA instance can be found at tf.validation.linaro.org.
+The TF LAVA instance can be found at http://tf.validation.linaro.org.
 
 LAVA instance for the Trusted Firmware project is set up in Linaro Harston LAB. It consists of lava-master running on a hosted bare metal server, lava-dispatcher running on the same server. Additional dispatchers are deployed using Raspberry Pi 4 hardware. More details below.
 
@@ -528,7 +528,7 @@ The following playbooks are used to configure all the relevant parts:
 * lab_lava_repo.yml file: add LAVA apt repository
 * dhcp_tf.yml file: for the static leases and general DHCP server configuration
 
-Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate lava-lab repository.
+Installing LAVA ( worker and master ) is a manual process. After that, the lava-lab.yml file takes care of setting up the correct device dictionaries, device types and health checks as configured in the separate [lava-lab repository](https://git.linaro.org/lava/lava-lab.git).
 
 Until the salt migration to ansible is complete you will need to go on tf-master.tflab host (ssh root@10.88.16.10). As root:
 
