@@ -1034,21 +1034,29 @@ As noted above, changes in next/tf-a-job-configs can be self approved and merged
 
 # Misc Info
 
-This information is used for creating this doc and is not needed for publishing.
 
-## Relevant Tickets
+## LAVA Ready
 
-Design and document Trusted-Firmware LAVA instance architecture
+This section documents the high-level guidelines and expectations when a TrustedFirmware Member wishes to put a board into the OpenCI board farm. This board farm is located in the Linaro facility near Cambridge, UK. A section of the Linaro lab has been allocated to trustedfirmware.org. All trustedfirmware boards are collocated on racks dedicated to the project.
 
-	https://projects.linaro.org/browse/LSS-926
+The general steps/guidelines for getting hardware placed into the lab is as follows:
 
-TF-CI Phase 2: CI user guide and document how to deploy local instance
+* Review the documentation herein including the OpenCI users guide and the [Best Practices for Getting Devices into LAVA](https://connect.linaro.org/resources/hkg18/hkg18-tr10/) tutorial
+* Create a ticket for the particular platform in the [OpenCI Jira Project](https://projects.linaro.org/secure/RapidBoard.jspa?rapidView=300&projectKey=TFC)
+   * Use a supported LAVA device type name for platform and put that in the ticket. Each board is required to have a device type in OpenCI that is also unique.
+   * Note that creating new "tickets" requires the appropriate access permissions.
+* An OpenCI Triage/Prioritization meeting is held weekly and can be attended by any members. This meeting prioritizes the OpenCI backlog to determine the work items to be added on an ongoing basis. Adding hardware to the lab is one of the tasks competing for cycle time of the OpenCI development team. This is why the next step is very important and benefits the entire OpenCI buildout.
+* Deliver a "LAVA Ready" package when it's wanted to add hardware to the OpenCI hardware farm. This includes the following:
+   * 5 identical platforms of the type wanting to place into the lab;
+      * Mailing address here: Linaro Ltd, Harston Mill, Royston Road, Harston, Cambridge, CB22 7GG, United Kingdom
+   * Develop and validate the LAVA Device_Type in a local lab first to assure the board is enabled. This is preferably upstreamed into the LAVA project. This is the development of a YAML file describing how LAVA can interact to the device thru multiple scenarios like rescue, serial, power cycle, boot flow, etc...
+   * Provide any information on how to health check the device. Typically a set of boot checks, verifying that the board comes up to a prompt, or firmware version as some examples
+   * Provide an Automation Guide: This includes the things about the device that will cause automation complexities. Examples might be power control, ways to interact w/ UART, cooling expectations, powering (USB or other), uniquely identifiable before f/w is up.
+* Delivery of all items (except the hardware) to the OpenCI development team will help them to size the effort and more accurately plan the team's activity pipeline.
+* Once adding the device to the lab is approved through the OpenCI triage prioritization efforts, the hardware can be sent to the lab for installation.
+   * Note that if multiple vendors are requesting to place platforms into the OpenCI or multiple platforms into the OpenCI, the requests shall be prioritized by the TrustedFirmware Board.
 
-	https://projects.linaro.org/browse/LSS-1473
 
-## Slides
-
-	https://docs.google.com/presentation/d/1NQw0-Uc_cmmxz30i_-cBsG9jBCr6uUYR-CD1eKEsk2I/edit?usp=sharing
 
 
 
