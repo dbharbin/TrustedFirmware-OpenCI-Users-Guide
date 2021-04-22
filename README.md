@@ -187,6 +187,8 @@ There may be many reasons to rebuild but perhaps the most trivial one is to make
 
 # LAVA documentation
 
+LAVA(Linaro Automation and Validation Architecture) provides detailed documentation that can be found [here](https://docs.lavasoftware.org/lava/index.html). 
+
 ## Supported platforms
 
 TF project support the following platforms in LAVA https://tf.validation.linaro.org/scheduler/device_types
